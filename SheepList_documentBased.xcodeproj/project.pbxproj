@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E1A6E4811FF7021F00423EF0 /* Sheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6E4801FF7021F00423EF0 /* Sheep.swift */; };
+		E1A6E4841FF7CF5D00423EF0 /* EditSheepTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6E4821FF7CF5D00423EF0 /* EditSheepTableViewController.swift */; };
+		E1A6E4851FF7CF5D00423EF0 /* EditSheepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6E4831FF7CF5D00423EF0 /* EditSheepTableViewCell.swift */; };
+		E1A75FB41FF6CB720010E07C /* SheepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA21FF6CB710010E07C /* SheepCell.swift */; };
+		E1A75FB51FF6CB720010E07C /* SheepTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA31FF6CB710010E07C /* SheepTableVC.swift */; };
+		E1A75FB61FF6CB720010E07C /* DateTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA41FF6CB710010E07C /* DateTVCell.swift */; };
+		E1A75FB71FF6CB720010E07C /* SingleSheepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA51FF6CB710010E07C /* SingleSheepCell.swift */; };
+		E1A75FB81FF6CB720010E07C /* ChooseGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA61FF6CB710010E07C /* ChooseGroupCell.swift */; };
+		E1A75FB91FF6CB720010E07C /* ChooseGroupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA71FF6CB710010E07C /* ChooseGroupTVC.swift */; };
+		E1A75FBA1FF6CB720010E07C /* DetailedSheepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA81FF6CB710010E07C /* DetailedSheepViewController.swift */; };
+		E1A75FBB1FF6CB720010E07C /* LambCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FA91FF6CB720010E07C /* LambCell.swift */; };
+		E1A75FBC1FF6CB720010E07C /* DisplayGroupsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FAA1FF6CB720010E07C /* DisplayGroupsCell.swift */; };
+		E1A75FBD1FF6CB720010E07C /* WorkingSetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FAB1FF6CB720010E07C /* WorkingSetController.swift */; };
+		E1A75FBE1FF6CB720010E07C /* DetailedSheepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FAC1FF6CB720010E07C /* DetailedSheepCell.swift */; };
+		E1A75FBF1FF6CB720010E07C /* SheepGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FAD1FF6CB720010E07C /* SheepGroupCell.swift */; };
+		E1A75FC01FF6CB720010E07C /* SheepList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FAE1FF6CB720010E07C /* SheepList.swift */; };
+		E1A75FC11FF6CB720010E07C /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FAF1FF6CB720010E07C /* ModelController.swift */; };
+		E1A75FC21FF6CB720010E07C /* AddSheepsToWorkingSetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FB01FF6CB720010E07C /* AddSheepsToWorkingSetTVC.swift */; };
+		E1A75FC31FF6CB720010E07C /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FB11FF6CB720010E07C /* TextViewCell.swift */; };
+		E1A75FC41FF6CB720010E07C /* SheepListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A75FB21FF6CB720010E07C /* SheepListController.swift */; };
+		E1C17EC5202DF66500F36662 /* PrimarySplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C17EC4202DF66500F36662 /* PrimarySplitViewController.swift */; };
+		E1C17EC7202F28C900F36662 /* EditGroupTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C17EC6202F28C900F36662 /* EditGroupTVC.swift */; };
+		E1C17EC9202F374E00F36662 /* SingleTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C17EC8202F374E00F36662 /* SingleTextFieldCell.swift */; };
+		E1E4B55B203047AB0023C377 /* LabelAndTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E4B55A203047AB0023C377 /* LabelAndTextFieldCell.swift */; };
+		E1F1AB351FD5BEFA009FA198 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1AB341FD5BEFA009FA198 /* AppDelegate.swift */; };
+		E1F1AB371FD5BEFA009FA198 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1AB361FD5BEFA009FA198 /* DocumentBrowserViewController.swift */; };
+		E1F1AB3B1FD5BEFA009FA198 /* SheepDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1AB3A1FD5BEFA009FA198 /* SheepDocument.swift */; };
+		E1F1AB3E1FD5BEFA009FA198 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F1AB3C1FD5BEFA009FA198 /* Main.storyboard */; };
+		E1F1AB401FD5BEFA009FA198 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1F1AB3F1FD5BEFA009FA198 /* Assets.xcassets */; };
+		E1F1AB431FD5BEFA009FA198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F1AB411FD5BEFA009FA198 /* LaunchScreen.storyboard */; };
+		E1F1AB4B1FD5D4FC009FA198 /* SheepListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1AB4A1FD5D4FC009FA198 /* SheepListError.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E1A6E4801FF7021F00423EF0 /* Sheep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheep.swift; sourceTree = "<group>"; };
+		E1A6E4821FF7CF5D00423EF0 /* EditSheepTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSheepTableViewController.swift; sourceTree = "<group>"; };
+		E1A6E4831FF7CF5D00423EF0 /* EditSheepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSheepTableViewCell.swift; sourceTree = "<group>"; };
+		E1A75FA21FF6CB710010E07C /* SheepCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheepCell.swift; sourceTree = "<group>"; };
+		E1A75FA31FF6CB710010E07C /* SheepTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheepTableVC.swift; sourceTree = "<group>"; };
+		E1A75FA41FF6CB710010E07C /* DateTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTVCell.swift; sourceTree = "<group>"; };
+		E1A75FA51FF6CB710010E07C /* SingleSheepCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSheepCell.swift; sourceTree = "<group>"; };
+		E1A75FA61FF6CB710010E07C /* ChooseGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGroupCell.swift; sourceTree = "<group>"; };
+		E1A75FA71FF6CB710010E07C /* ChooseGroupTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGroupTVC.swift; sourceTree = "<group>"; };
+		E1A75FA81FF6CB710010E07C /* DetailedSheepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedSheepViewController.swift; sourceTree = "<group>"; };
+		E1A75FA91FF6CB720010E07C /* LambCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LambCell.swift; sourceTree = "<group>"; };
+		E1A75FAA1FF6CB720010E07C /* DisplayGroupsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayGroupsCell.swift; sourceTree = "<group>"; };
+		E1A75FAB1FF6CB720010E07C /* WorkingSetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkingSetController.swift; sourceTree = "<group>"; };
+		E1A75FAC1FF6CB720010E07C /* DetailedSheepCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedSheepCell.swift; sourceTree = "<group>"; };
+		E1A75FAD1FF6CB720010E07C /* SheepGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheepGroupCell.swift; sourceTree = "<group>"; };
+		E1A75FAE1FF6CB720010E07C /* SheepList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheepList.swift; sourceTree = "<group>"; };
+		E1A75FAF1FF6CB720010E07C /* ModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
+		E1A75FB01FF6CB720010E07C /* AddSheepsToWorkingSetTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSheepsToWorkingSetTVC.swift; sourceTree = "<group>"; };
+		E1A75FB11FF6CB720010E07C /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		E1A75FB21FF6CB720010E07C /* SheepListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheepListController.swift; sourceTree = "<group>"; };
+		E1C17EC4202DF66500F36662 /* PrimarySplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimarySplitViewController.swift; sourceTree = "<group>"; };
+		E1C17EC6202F28C900F36662 /* EditGroupTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupTVC.swift; sourceTree = "<group>"; };
+		E1C17EC8202F374E00F36662 /* SingleTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTextFieldCell.swift; sourceTree = "<group>"; };
+		E1E4B55A203047AB0023C377 /* LabelAndTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAndTextFieldCell.swift; sourceTree = "<group>"; };
+		E1F1AB311FD5BEFA009FA198 /* SheepList_documentBased.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepList_documentBased.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1F1AB341FD5BEFA009FA198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E1F1AB361FD5BEFA009FA198 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
+		E1F1AB3A1FD5BEFA009FA198 /* SheepDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepDocument.swift; sourceTree = "<group>"; };
+		E1F1AB3D1FD5BEFA009FA198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E1F1AB3F1FD5BEFA009FA198 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E1F1AB421FD5BEFA009FA198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E1F1AB441FD5BEFA009FA198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1F1AB4A1FD5D4FC009FA198 /* SheepListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheepListError.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E1F1AB2E1FD5BEFA009FA198 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E1A6E4861FFA6F1300423EF0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E1E4B55A203047AB0023C377 /* LabelAndTextFieldCell.swift */,
+				E1A75FA91FF6CB720010E07C /* LambCell.swift */,
+				E1A75FAC1FF6CB720010E07C /* DetailedSheepCell.swift */,
+				E1A75FA61FF6CB710010E07C /* ChooseGroupCell.swift */,
+				E1A75FAA1FF6CB720010E07C /* DisplayGroupsCell.swift */,
+				E1A6E4831FF7CF5D00423EF0 /* EditSheepTableViewCell.swift */,
+				E1A75FA51FF6CB710010E07C /* SingleSheepCell.swift */,
+				E1A75FB11FF6CB720010E07C /* TextViewCell.swift */,
+				E1A75FA21FF6CB710010E07C /* SheepCell.swift */,
+				E1A75FAD1FF6CB720010E07C /* SheepGroupCell.swift */,
+				E1A75FA41FF6CB710010E07C /* DateTVCell.swift */,
+				E1C17EC8202F374E00F36662 /* SingleTextFieldCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E1A75FA11FF6CB370010E07C /* SheepList */ = {
+			isa = PBXGroup;
+			children = (
+				E1A6E4801FF7021F00423EF0 /* Sheep.swift */,
+				E1A75FAE1FF6CB720010E07C /* SheepList.swift */,
+				E1F1AB3A1FD5BEFA009FA198 /* SheepDocument.swift */,
+				E1A75FAF1FF6CB720010E07C /* ModelController.swift */,
+				E1A75FB21FF6CB720010E07C /* SheepListController.swift */,
+				E1A75FA81FF6CB710010E07C /* DetailedSheepViewController.swift */,
+				E1A6E4821FF7CF5D00423EF0 /* EditSheepTableViewController.swift */,
+				E1A75FA71FF6CB710010E07C /* ChooseGroupTVC.swift */,
+				E1C17EC6202F28C900F36662 /* EditGroupTVC.swift */,
+				E1A75FAB1FF6CB720010E07C /* WorkingSetController.swift */,
+				E1A75FB01FF6CB720010E07C /* AddSheepsToWorkingSetTVC.swift */,
+				E1A75FA31FF6CB710010E07C /* SheepTableVC.swift */,
+				E1A6E4861FFA6F1300423EF0 /* Cells */,
+			);
+			path = SheepList;
+			sourceTree = "<group>";
+		};
+		E1F1AB281FD5BEFA009FA198 = {
+			isa = PBXGroup;
+			children = (
+				E1F1AB331FD5BEFA009FA198 /* SheepList_documentBased */,
+				E1F1AB321FD5BEFA009FA198 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E1F1AB321FD5BEFA009FA198 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1AB311FD5BEFA009FA198 /* SheepList_documentBased.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1F1AB331FD5BEFA009FA198 /* SheepList_documentBased */ = {
+			isa = PBXGroup;
+			children = (
+				E1F1AB341FD5BEFA009FA198 /* AppDelegate.swift */,
+				E1F1AB361FD5BEFA009FA198 /* DocumentBrowserViewController.swift */,
+				E1F1AB3C1FD5BEFA009FA198 /* Main.storyboard */,
+				E1C17EC4202DF66500F36662 /* PrimarySplitViewController.swift */,
+				E1A75FA11FF6CB370010E07C /* SheepList */,
+				E1F1AB4A1FD5D4FC009FA198 /* SheepListError.swift */,
+				E1F1AB3F1FD5BEFA009FA198 /* Assets.xcassets */,
+				E1F1AB411FD5BEFA009FA198 /* LaunchScreen.storyboard */,
+				E1F1AB441FD5BEFA009FA198 /* Info.plist */,
+			);
+			path = SheepList_documentBased;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E1F1AB301FD5BEFA009FA198 /* SheepList_documentBased */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1F1AB471FD5BEFA009FA198 /* Build configuration list for PBXNativeTarget "SheepList_documentBased" */;
+			buildPhases = (
+				E1F1AB2D1FD5BEFA009FA198 /* Sources */,
+				E1F1AB2E1FD5BEFA009FA198 /* Frameworks */,
+				E1F1AB2F1FD5BEFA009FA198 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SheepList_documentBased;
+			productName = SheepList_documentBased;
+			productReference = E1F1AB311FD5BEFA009FA198 /* SheepList_documentBased.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E1F1AB291FD5BEFA009FA198 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Andreas Våge";
+				TargetAttributes = {
+					E1F1AB301FD5BEFA009FA198 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E1F1AB2C1FD5BEFA009FA198 /* Build configuration list for PBXProject "SheepList_documentBased" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E1F1AB281FD5BEFA009FA198;
+			productRefGroup = E1F1AB321FD5BEFA009FA198 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E1F1AB301FD5BEFA009FA198 /* SheepList_documentBased */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E1F1AB2F1FD5BEFA009FA198 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1F1AB431FD5BEFA009FA198 /* LaunchScreen.storyboard in Resources */,
+				E1F1AB401FD5BEFA009FA198 /* Assets.xcassets in Resources */,
+				E1F1AB3E1FD5BEFA009FA198 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E1F1AB2D1FD5BEFA009FA198 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1A75FBF1FF6CB720010E07C /* SheepGroupCell.swift in Sources */,
+				E1A75FBA1FF6CB720010E07C /* DetailedSheepViewController.swift in Sources */,
+				E1F1AB3B1FD5BEFA009FA198 /* SheepDocument.swift in Sources */,
+				E1A6E4811FF7021F00423EF0 /* Sheep.swift in Sources */,
+				E1A75FB41FF6CB720010E07C /* SheepCell.swift in Sources */,
+				E1A75FBE1FF6CB720010E07C /* DetailedSheepCell.swift in Sources */,
+				E1E4B55B203047AB0023C377 /* LabelAndTextFieldCell.swift in Sources */,
+				E1A75FB81FF6CB720010E07C /* ChooseGroupCell.swift in Sources */,
+				E1A6E4851FF7CF5D00423EF0 /* EditSheepTableViewCell.swift in Sources */,
+				E1A75FC31FF6CB720010E07C /* TextViewCell.swift in Sources */,
+				E1F1AB4B1FD5D4FC009FA198 /* SheepListError.swift in Sources */,
+				E1A75FB61FF6CB720010E07C /* DateTVCell.swift in Sources */,
+				E1A75FB71FF6CB720010E07C /* SingleSheepCell.swift in Sources */,
+				E1A75FC11FF6CB720010E07C /* ModelController.swift in Sources */,
+				E1A75FBC1FF6CB720010E07C /* DisplayGroupsCell.swift in Sources */,
+				E1A75FBD1FF6CB720010E07C /* WorkingSetController.swift in Sources */,
+				E1A75FBB1FF6CB720010E07C /* LambCell.swift in Sources */,
+				E1C17EC9202F374E00F36662 /* SingleTextFieldCell.swift in Sources */,
+				E1C17EC5202DF66500F36662 /* PrimarySplitViewController.swift in Sources */,
+				E1C17EC7202F28C900F36662 /* EditGroupTVC.swift in Sources */,
+				E1A75FB51FF6CB720010E07C /* SheepTableVC.swift in Sources */,
+				E1A75FC21FF6CB720010E07C /* AddSheepsToWorkingSetTVC.swift in Sources */,
+				E1A75FC41FF6CB720010E07C /* SheepListController.swift in Sources */,
+				E1A6E4841FF7CF5D00423EF0 /* EditSheepTableViewController.swift in Sources */,
+				E1A75FB91FF6CB720010E07C /* ChooseGroupTVC.swift in Sources */,
+				E1A75FC01FF6CB720010E07C /* SheepList.swift in Sources */,
+				E1F1AB371FD5BEFA009FA198 /* DocumentBrowserViewController.swift in Sources */,
+				E1F1AB351FD5BEFA009FA198 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E1F1AB3C1FD5BEFA009FA198 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1F1AB3D1FD5BEFA009FA198 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E1F1AB411FD5BEFA009FA198 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1F1AB421FD5BEFA009FA198 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E1F1AB451FD5BEFA009FA198 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E1F1AB461FD5BEFA009FA198 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E1F1AB481FD5BEFA009FA198 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UU28JUKUM7;
+				INFOPLIST_FILE = SheepList_documentBased/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "AndreasVage.SheepList-documentBased";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E1F1AB491FD5BEFA009FA198 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UU28JUKUM7;
+				INFOPLIST_FILE = SheepList_documentBased/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "AndreasVage.SheepList-documentBased";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E1F1AB2C1FD5BEFA009FA198 /* Build configuration list for PBXProject "SheepList_documentBased" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1F1AB451FD5BEFA009FA198 /* Debug */,
+				E1F1AB461FD5BEFA009FA198 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1F1AB471FD5BEFA009FA198 /* Build configuration list for PBXNativeTarget "SheepList_documentBased" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1F1AB481FD5BEFA009FA198 /* Debug */,
+				E1F1AB491FD5BEFA009FA198 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E1F1AB291FD5BEFA009FA198 /* Project object */;
+}

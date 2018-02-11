@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Document Browser View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DocumentBrowserViewController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="0fo-ii-Aj5"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4138" y="-63"/>
+        </scene>
+        <!--Sheep List-->
+        <scene sceneID="8eo-9y-8YK">
+            <objects>
+                <splitViewController id="GVs-LW-cpY" customClass="PrimarySplitViewController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sheep List" id="NEa-km-GXt"/>
+                    <connections>
+                        <segue destination="eRr-qz-AQC" kind="relationship" relationship="masterViewController" id="Pio-bQ-oKt"/>
+                        <segue destination="EIw-cF-gXc" kind="relationship" relationship="detailViewController" id="8Y2-KW-Y8T"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tQV-lT-4sv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2058" y="199"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Afp-bC-sXZ">
+            <objects>
+                <tabBarController storyboardIdentifier="DocumentMVC" id="uIl-8W-9Wx" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="P5J-cm-B2H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="GVs-LW-cpY" kind="relationship" relationship="viewControllers" id="qGT-YA-h54"/>
+                        <segue destination="Q1i-qZ-UMr" kind="relationship" relationship="viewControllers" id="J6d-ny-7df"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lvZ-Mb-6zK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3295" y="-63"/>
+        </scene>
+        <!--Sheep List-->
+        <scene sceneID="Z8u-6X-PLG">
+            <objects>
+                <navigationController id="eRr-qz-AQC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sheep List" id="YB8-3z-5xm"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mwF-eB-jge">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="P4R-8s-aaz">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="jKf-eq-3hT" kind="relationship" relationship="rootViewController" id="PEH-qL-YCq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JLV-HF-nRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1273" y="541"/>
+        </scene>
+        <!--Working Set-->
+        <scene sceneID="IWB-qG-Kaj">
+            <objects>
+                <navigationController id="CtA-xR-7dg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Working Set" id="qLT-3y-Fgj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PAT-l8-Vhy">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="l6d-1w-l4O" kind="relationship" relationship="rootViewController" id="vq6-C7-Mdw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yu1-Kt-eFn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1274" y="-963"/>
+        </scene>
+        <!--Sheep List-->
+        <scene sceneID="MZA-fE-Kut">
+            <objects>
+                <tableViewController id="jKf-eq-3hT" userLabel="Sheep List" customClass="SheepListController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="WoB-0z-zCB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eJd-P3-MvM">
+                            <rect key="frame" x="0.0" y="128" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Register new sheep"/>
+                            <connections>
+                                <segue destination="aZB-Vb-LP1" kind="presentation" identifier="newSheep" id="4SU-PW-vmN"/>
+                            </connections>
+                        </button>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SheepCellIdentifier" id="Gna-vf-eSI" customClass="SheepCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gna-vf-eSI" id="edk-xG-nP1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FG-mF-b6z">
+                                            <rect key="frame" x="24" y="36.5" width="52.5" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="4mo-Hx-2v9">
+                                            <rect key="frame" x="276.5" y="11" width="74.5" height="78"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="4mo-Hx-2v9" secondAttribute="bottom" id="7cX-Af-Gea"/>
+                                        <constraint firstItem="4mo-Hx-2v9" firstAttribute="top" secondItem="edk-xG-nP1" secondAttribute="topMargin" id="AXe-3X-pJQ"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="5FG-mF-b6z" secondAttribute="bottom" constant="8" id="DMs-Kn-u3r"/>
+                                        <constraint firstItem="5FG-mF-b6z" firstAttribute="leading" secondItem="edk-xG-nP1" secondAttribute="leadingMargin" constant="8" id="EnM-zS-Iln"/>
+                                        <constraint firstItem="4mo-Hx-2v9" firstAttribute="leading" secondItem="5FG-mF-b6z" secondAttribute="trailing" priority="250" constant="200" id="MBk-ak-cPh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="4mo-Hx-2v9" secondAttribute="trailing" constant="8" id="Obq-92-ZKx"/>
+                                        <constraint firstItem="5FG-mF-b6z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="edk-xG-nP1" secondAttribute="topMargin" constant="8" id="oBU-CV-5eN"/>
+                                        <constraint firstItem="5FG-mF-b6z" firstAttribute="centerY" secondItem="edk-xG-nP1" secondAttribute="centerY" id="vYM-6Z-3kj"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="LambStackView" destination="4mo-Hx-2v9" id="QJb-vR-Ql3"/>
+                                    <outlet property="SheepIDLabel" destination="5FG-mF-b6z" id="OSl-rL-ICe"/>
+                                    <segue destination="EIw-cF-gXc" kind="showDetail" identifier="showDetails" id="rGH-3x-aBA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jKf-eq-3hT" id="ZeP-xo-Vn8"/>
+                            <outlet property="delegate" destination="jKf-eq-3hT" id="CyQ-Sf-q54"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Sheep List" id="Tuu-BS-1Bx">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="nxw-jw-aSl"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="B48-0y-0fi">
+                            <connections>
+                                <segue destination="aZB-Vb-LP1" kind="presentation" identifier="newSheep" id="Ul3-G0-d4M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ehn-cI-GgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-473" y="540"/>
+        </scene>
+        <!--DetailedSheepView-->
+        <scene sceneID="eq0-Dt-IZB">
+            <objects>
+                <tableViewController id="EIw-cF-gXc" userLabel="DetailedSheepView" customClass="DetailedSheepViewController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="88" sectionHeaderHeight="18" sectionFooterHeight="18" id="5rP-fI-oyH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailedSheepCell" id="e54-4p-Uzz" customClass="DetailedSheepCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="88"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e54-4p-Uzz" id="Rgy-Tw-VyD">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jG-22-E8Z">
+                                            <rect key="frame" x="113" y="35.5" width="35" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2k-7b-iZ9">
+                                            <rect key="frame" x="24" y="29" width="57" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Notes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Duk-rp-7uC">
+                                            <rect key="frame" x="197.5" y="11" width="161.5" height="66"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8jG-22-E8Z" firstAttribute="leading" secondItem="C2k-7b-iZ9" secondAttribute="trailing" constant="32" id="GOg-TC-Dhg"/>
+                                        <constraint firstItem="C2k-7b-iZ9" firstAttribute="leading" secondItem="Rgy-Tw-VyD" secondAttribute="leadingMargin" constant="8" id="I3x-5z-uY0"/>
+                                        <constraint firstItem="8jG-22-E8Z" firstAttribute="centerY" secondItem="Rgy-Tw-VyD" secondAttribute="centerY" id="KFz-6W-yNd"/>
+                                        <constraint firstItem="Duk-rp-7uC" firstAttribute="leading" secondItem="8jG-22-E8Z" secondAttribute="trailing" constant="49.5" id="RYD-Pu-5yJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Duk-rp-7uC" secondAttribute="bottom" id="b1S-LS-u7Q"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Duk-rp-7uC" secondAttribute="trailing" id="fcQ-sg-lag"/>
+                                        <constraint firstItem="Duk-rp-7uC" firstAttribute="top" secondItem="Rgy-Tw-VyD" secondAttribute="topMargin" id="iwa-dl-Yq4"/>
+                                        <constraint firstItem="C2k-7b-iZ9" firstAttribute="centerY" secondItem="Rgy-Tw-VyD" secondAttribute="centerY" id="kvE-XM-gak"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="birthdayLabel" destination="8jG-22-E8Z" id="R9l-ik-a3U"/>
+                                    <outlet property="notesTextField" destination="Duk-rp-7uC" id="oD5-3S-P7o"/>
+                                    <outlet property="sheepIDTextLabel" destination="C2k-7b-iZ9" id="RP9-Oe-2N7"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="EIw-cF-gXc" id="gbY-1O-jrX"/>
+                            <outlet property="delegate" destination="EIw-cF-gXc" id="vTx-Z1-SWf"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Detailed" id="SHj-hr-RGN">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Cgc-15-nBC">
+                            <connections>
+                                <segue destination="aZB-Vb-LP1" kind="presentation" identifier="editSheep" id="w0h-w2-JhI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RZR-zC-fCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="785" y="-63"/>
+        </scene>
+        <!--Edit Sheep-->
+        <scene sceneID="i5H-N5-z7h">
+            <objects>
+                <tableViewController id="SdK-CP-TIC" userLabel="Edit Sheep" customClass="EditSheepTableViewController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="132" sectionHeaderHeight="28" sectionFooterHeight="28" id="biR-cg-p1S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="a7j-HD-5Iv">
+                            <rect key="frame" x="0.0" y="582" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7l-kI-IAm">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <state key="normal" title="Register new lamb"/>
+                                    <connections>
+                                        <action selector="addLambButtonPressed:" destination="SdK-CP-TIC" eventType="touchDown" id="6ru-oO-Nc4"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Q7l-kI-IAm" secondAttribute="trailing" id="BHq-1l-CTI"/>
+                                <constraint firstAttribute="bottom" secondItem="Q7l-kI-IAm" secondAttribute="bottom" id="L1X-ct-UVb"/>
+                                <constraint firstItem="Q7l-kI-IAm" firstAttribute="top" secondItem="a7j-HD-5Iv" secondAttribute="top" id="ZCQ-1n-33Q"/>
+                                <constraint firstItem="Q7l-kI-IAm" firstAttribute="leading" secondItem="a7j-HD-5Iv" secondAttribute="leading" id="vqI-XF-b9Y"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditSheepCell" rowHeight="61" id="h07-fG-jKN" customClass="EditSheepTableViewCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="61"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h07-fG-jKN" id="hvD-bY-wux">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sheep ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4hT-rZ-jZB">
+                                            <rect key="frame" x="24" y="0.0" width="327" height="60.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4hT-rZ-jZB" firstAttribute="leading" secondItem="hvD-bY-wux" secondAttribute="leadingMargin" constant="8" id="2hc-dF-5El"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="4hT-rZ-jZB" secondAttribute="trailing" constant="8" id="6yS-OW-6Eh"/>
+                                        <constraint firstAttribute="bottom" secondItem="4hT-rZ-jZB" secondAttribute="bottom" id="D5Y-te-GOx"/>
+                                        <constraint firstItem="4hT-rZ-jZB" firstAttribute="top" secondItem="hvD-bY-wux" secondAttribute="top" id="ZqF-Kl-OKg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="sheepIDTextField" destination="4hT-rZ-jZB" id="3vs-Cu-dDt"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DateCell" rowHeight="141" id="0O1-hA-oEh" customClass="DateTVCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="89" width="375" height="141"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0O1-hA-oEh" id="Yam-kz-akP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hgi-0L-0h2">
+                                            <rect key="frame" x="16" y="31.5" width="343" height="165"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="165" id="bc1-ax-CDl"/>
+                                                <constraint firstAttribute="height" constant="165" id="nhD-gg-BNj"/>
+                                            </constraints>
+                                            <date key="date" timeIntervalSinceReferenceDate="520369178.812244">
+                                                <!--2017-06-28 18:59:38 +0000-->
+                                            </date>
+                                            <connections>
+                                                <action selector="birthdayPickerChanged:" destination="SdK-CP-TIC" eventType="valueChanged" id="iFq-Dl-iDU"/>
+                                            </connections>
+                                        </datePicker>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLT-k3-RMu">
+                                            <rect key="frame" x="166.5" y="11" width="42" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hgi-0L-0h2" firstAttribute="leading" secondItem="Yam-kz-akP" secondAttribute="leadingMargin" id="5Mw-9o-VIQ"/>
+                                        <constraint firstItem="hgi-0L-0h2" firstAttribute="top" secondItem="QLT-k3-RMu" secondAttribute="bottom" id="Fe4-VW-Bcw"/>
+                                        <constraint firstItem="QLT-k3-RMu" firstAttribute="top" secondItem="Yam-kz-akP" secondAttribute="top" constant="11" id="PCf-7r-nLc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hgi-0L-0h2" secondAttribute="trailing" id="i1w-od-fAr"/>
+                                        <constraint firstItem="QLT-k3-RMu" firstAttribute="centerX" secondItem="Yam-kz-akP" secondAttribute="centerXWithinMargins" id="v7y-9P-dKT"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="QLT-k3-RMu" id="B3I-6D-N5F"/>
+                                    <outlet property="datePicker" destination="hgi-0L-0h2" id="spc-pz-Avs"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextViewCell" id="7Su-4O-wmr" customClass="TextViewCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="230" width="375" height="132"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Su-4O-wmr" id="6an-ru-YYH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Rd6-uC-Ycu">
+                                            <rect key="frame" x="24" y="0.0" width="327" height="131.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Rd6-uC-Ycu" secondAttribute="bottom" id="7Z8-77-Ppf"/>
+                                        <constraint firstItem="Rd6-uC-Ycu" firstAttribute="leading" secondItem="6an-ru-YYH" secondAttribute="leadingMargin" constant="8" id="DbU-Gy-rlO"/>
+                                        <constraint firstItem="Rd6-uC-Ycu" firstAttribute="top" secondItem="6an-ru-YYH" secondAttribute="top" id="OVk-Aj-srE"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Rd6-uC-Ycu" secondAttribute="trailing" constant="8" id="qad-NV-Iho"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="notesTextView" destination="Rd6-uC-Ycu" id="8IZ-hj-0Yf"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DisplayGroupsCell" rowHeight="44" id="kLb-8U-jPX" customClass="DisplayGroupsCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="362" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kLb-8U-jPX" id="uCI-TH-em2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qd3-aB-79t">
+                                            <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UKY-Q8-U8y">
+                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SheepGroupCell" id="ZxU-Zl-3oK" customClass="SheepGroupCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZB-fl-ECy">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XRt-Hk-Hky">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="XRt-Hk-Hky" firstAttribute="top" secondItem="sZB-fl-ECy" secondAttribute="top" id="3Z5-f1-w7y"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="XRt-Hk-Hky" secondAttribute="bottom" id="Cnv-NE-Q3n"/>
+                                                                    <constraint firstItem="XRt-Hk-Hky" firstAttribute="leading" secondItem="sZB-fl-ECy" secondAttribute="leading" id="IxU-qW-gpH"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="XRt-Hk-Hky" secondAttribute="trailing" id="c7P-3y-VIt"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </view>
+                                                    <constraints>
+                                                        <constraint firstItem="sZB-fl-ECy" firstAttribute="top" secondItem="ZxU-Zl-3oK" secondAttribute="top" id="3KX-1s-KNV"/>
+                                                        <constraint firstItem="sZB-fl-ECy" firstAttribute="leading" secondItem="ZxU-Zl-3oK" secondAttribute="leading" id="70F-l6-mg4"/>
+                                                        <constraint firstAttribute="bottom" secondItem="sZB-fl-ECy" secondAttribute="bottom" id="7Sq-kP-nDp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="sZB-fl-ECy" secondAttribute="trailing" id="fH2-cj-FDc"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="groupLabel" destination="XRt-Hk-Hky" id="5tb-84-E5c"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qd3-aB-79t" firstAttribute="trailing" secondItem="uCI-TH-em2" secondAttribute="trailingMargin" id="0fa-gw-U4p"/>
+                                        <constraint firstItem="qd3-aB-79t" firstAttribute="leading" secondItem="uCI-TH-em2" secondAttribute="leadingMargin" id="Y4O-eN-iIN"/>
+                                        <constraint firstItem="qd3-aB-79t" firstAttribute="top" secondItem="uCI-TH-em2" secondAttribute="topMargin" id="hGA-yo-7lb"/>
+                                        <constraint firstItem="qd3-aB-79t" firstAttribute="bottom" secondItem="uCI-TH-em2" secondAttribute="bottomMargin" id="pBA-HM-17C"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="collectionView" destination="qd3-aB-79t" id="2mD-yQ-lvq"/>
+                                    <segue destination="Cw4-Sk-gop" kind="show" identifier="chooseGroup" id="AGT-I3-IEP">
+                                        <nil key="action"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LambCell" rowHeight="44" id="GF6-tI-Lqq" customClass="LambCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="406" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GF6-tI-Lqq" id="U53-sG-5rK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lamb ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tEz-tM-6jT">
+                                            <rect key="frame" x="24" y="7" width="93.5" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STa-Vf-dan">
+                                            <rect key="frame" x="309" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxj-Lq-Z69">
+                                            <rect key="frame" x="155.5" y="12" width="64.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Gxj-Lq-Z69" firstAttribute="centerY" secondItem="U53-sG-5rK" secondAttribute="centerY" id="BXh-kG-cmJ"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tEz-tM-6jT" secondAttribute="trailingMargin" id="BsC-dB-nAh"/>
+                                        <constraint firstItem="STa-Vf-dan" firstAttribute="centerY" secondItem="U53-sG-5rK" secondAttribute="centerY" id="HDC-nE-N5b"/>
+                                        <constraint firstItem="tEz-tM-6jT" firstAttribute="leading" secondItem="U53-sG-5rK" secondAttribute="leadingMargin" constant="8" id="Pkl-v0-3fK"/>
+                                        <constraint firstItem="tEz-tM-6jT" firstAttribute="centerY" secondItem="U53-sG-5rK" secondAttribute="centerY" id="XGx-Bl-9tD"/>
+                                        <constraint firstItem="STa-Vf-dan" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="U53-sG-5rK" secondAttribute="leadingMargin" id="mPu-LP-pTa"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="STa-Vf-dan" secondAttribute="trailing" constant="8" id="sy5-JV-uc8"/>
+                                        <constraint firstItem="Gxj-Lq-Z69" firstAttribute="centerX" secondItem="U53-sG-5rK" secondAttribute="centerXWithinMargins" id="wA4-9o-dnE"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="DateLabel" destination="STa-Vf-dan" id="JSa-Wi-PcI"/>
+                                    <outlet property="lambIDTextField" destination="tEz-tM-6jT" id="r7c-1l-u1X"/>
+                                    <segue destination="SdK-CP-TIC" kind="show" identifier="editLamb" id="z4Z-s5-f99"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="labelAndTextFieldCell" id="d3W-rp-t8W" customClass="LabelAndTextFieldCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="450" width="375" height="132"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d3W-rp-t8W" id="WEL-2Z-ZiY">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CSW-b1-tU6">
+                                            <rect key="frame" x="159" y="11" width="150" height="110"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" priority="750" constant="150" id="rcx-Um-TAb"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="23"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DjF-dB-9ps">
+                                            <rect key="frame" x="26" y="55.5" width="44" height="21.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="CSW-b1-tU6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DjF-dB-9ps" secondAttribute="trailing" id="2UE-Jx-zGO"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="CSW-b1-tU6" secondAttribute="trailing" constant="50" id="79x-33-NjT"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="CSW-b1-tU6" secondAttribute="bottom" id="BMG-EB-CMu"/>
+                                        <constraint firstItem="CSW-b1-tU6" firstAttribute="top" secondItem="WEL-2Z-ZiY" secondAttribute="topMargin" id="T5f-lW-9La"/>
+                                        <constraint firstItem="DjF-dB-9ps" firstAttribute="leading" secondItem="WEL-2Z-ZiY" secondAttribute="leadingMargin" constant="10" id="iS1-av-d5E"/>
+                                        <constraint firstItem="DjF-dB-9ps" firstAttribute="centerY" secondItem="WEL-2Z-ZiY" secondAttribute="centerY" id="nWQ-AL-e0u"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="DjF-dB-9ps" id="NWC-Db-h6G"/>
+                                    <outlet property="textField" destination="CSW-b1-tU6" id="IKn-f1-JHC"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SdK-CP-TIC" id="pdA-s6-cC4"/>
+                            <outlet property="delegate" destination="SdK-CP-TIC" id="LUG-Qf-dbh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Sheep" id="BHk-74-P5K">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="z57-UD-bFK">
+                            <connections>
+                                <action selector="cancelUnwind:" destination="SdK-CP-TIC" id="FYh-v5-ahw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DZn-Ew-ada">
+                            <connections>
+                                <action selector="saveUnwind:" destination="SdK-CP-TIC" id="04n-Xt-uEl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addLambButton" destination="Q7l-kI-IAm" id="sZI-kf-x0u"/>
+                        <outlet property="saveButton" destination="DZn-Ew-ada" id="MWT-ad-jDX"/>
+                        <segue destination="NJD-0q-YQt" kind="unwind" identifier="SaveUnwindToDetailedSheep" unwindAction="unwindToDetailedSheepWithSegue:" id="Wru-d5-NQj"/>
+                        <segue destination="NJD-0q-YQt" kind="unwind" identifier="SaveUnwindToSheepList" unwindAction="unwindToSheepListWithSegue:" id="kfG-Ml-Bsd"/>
+                        <segue destination="NJD-0q-YQt" kind="unwind" identifier="cancelUnwindToDetailedSheep" unwindAction="unwindToDetailedSheepWithSegue:" id="i4v-Sw-zXm"/>
+                        <segue destination="NJD-0q-YQt" kind="unwind" identifier="cancelUnwindToSheepList" unwindAction="unwindToSheepListWithSegue:" id="2m6-UC-oga"/>
+                        <segue destination="NJD-0q-YQt" kind="unwind" identifier="unwindToEditSheep" unwindAction="unwindToEditSheepWithSegue:" id="lrP-9B-EE5"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lry-Dw-klf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NJD-0q-YQt" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="726"/>
+        </scene>
+        <!--Choose Group-->
+        <scene sceneID="vTd-Ls-6Q6">
+            <objects>
+                <tableViewController id="Cw4-Sk-gop" userLabel="Choose Group" customClass="ChooseGroupTVC" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pdy-UG-81v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="default" id="Jhm-Jw-qmE" customClass="ChooseGroupCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jhm-Jw-qmE" id="G0J-is-Qam">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Cw4-Sk-gop" id="T4z-wR-AE5"/>
+                            <outlet property="delegate" destination="Cw4-Sk-gop" id="jgL-BE-aWw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Groups" id="XVZ-7G-NTV">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="R7j-cv-4ig"/>
+                            <barButtonItem systemItem="add" id="EvT-cN-xBE">
+                                <connections>
+                                    <segue destination="LHi-Ow-qEy" kind="show" identifier="newGroup" id="Tti-8w-zMh"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="LHi-Ow-qEy" kind="show" identifier="editGroup" id="pux-x7-KVU"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mf3-ZF-vfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2531" y="727"/>
+        </scene>
+        <!--Edit GroupTVC-->
+        <scene sceneID="vT7-dZ-MDv">
+            <objects>
+                <tableViewController id="LHi-Ow-qEy" customClass="EditGroupTVC" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IiP-N0-AJg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="singleTextFieldCell" id="fnE-57-YgH" customClass="SingleTextFieldCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fnE-57-YgH" id="Nuj-RH-E2k">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lRB-pb-ZAQ">
+                                            <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lRB-pb-ZAQ" firstAttribute="leading" secondItem="Nuj-RH-E2k" secondAttribute="leadingMargin" id="Dkd-iG-oUz"/>
+                                        <constraint firstItem="lRB-pb-ZAQ" firstAttribute="top" secondItem="Nuj-RH-E2k" secondAttribute="topMargin" id="PRK-Ny-XuJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="lRB-pb-ZAQ" secondAttribute="bottom" id="d9b-qL-60X"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="lRB-pb-ZAQ" secondAttribute="trailing" id="zy4-lB-kyH"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="lRB-pb-ZAQ" id="b5D-nN-5QA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LHi-Ow-qEy" id="rau-ff-F9R"/>
+                            <outlet property="delegate" destination="LHi-Ow-qEy" id="2Hd-tH-bR1"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rtB-kJ-AIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3550" y="726"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lW3-bx-qAC">
+            <objects>
+                <navigationController id="aZB-Vb-LP1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tMv-sy-Yy8">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SdK-CP-TIC" kind="relationship" relationship="rootViewController" id="ku3-OY-x0x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xOG-OQ-08g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="785" y="725"/>
+        </scene>
+        <!--Sheep List-->
+        <scene sceneID="y6K-Rw-2Dd">
+            <objects>
+                <tableViewController id="l6d-1w-l4O" userLabel="Sheep List" customClass="WorkingSetController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="cV8-xq-cEj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A7G-bC-Ixm">
+                            <rect key="frame" x="0.0" y="128" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Add sheeps"/>
+                            <connections>
+                                <segue destination="plZ-zb-93P" kind="presentation" identifier="addSheep" id="pES-Gy-eO3"/>
+                            </connections>
+                        </button>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SheepCellIdentifier" id="bM6-3t-vmu" customClass="SheepCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bM6-3t-vmu" id="JBt-yv-Mce">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX0-Sq-Vae">
+                                            <rect key="frame" x="24" y="36.5" width="52.5" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="dM8-jw-8Nt">
+                                            <rect key="frame" x="276.5" y="11" width="74.5" height="78"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dM8-jw-8Nt" firstAttribute="leading" secondItem="gX0-Sq-Vae" secondAttribute="trailing" priority="250" constant="200" id="MRA-lZ-m2Z"/>
+                                        <constraint firstItem="dM8-jw-8Nt" firstAttribute="top" secondItem="JBt-yv-Mce" secondAttribute="topMargin" id="YyM-CV-CrI"/>
+                                        <constraint firstItem="gX0-Sq-Vae" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JBt-yv-Mce" secondAttribute="topMargin" constant="8" id="ZMR-NW-oap"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="dM8-jw-8Nt" secondAttribute="bottom" id="bO4-j5-Pvn"/>
+                                        <constraint firstItem="gX0-Sq-Vae" firstAttribute="leading" secondItem="JBt-yv-Mce" secondAttribute="leadingMargin" constant="8" id="h61-bk-o9t"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="gX0-Sq-Vae" secondAttribute="bottom" constant="8" id="hv8-hc-0wK"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dM8-jw-8Nt" secondAttribute="trailing" constant="8" id="veZ-jZ-7fo"/>
+                                        <constraint firstItem="gX0-Sq-Vae" firstAttribute="centerY" secondItem="JBt-yv-Mce" secondAttribute="centerY" id="w41-hv-qXu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="LambStackView" destination="dM8-jw-8Nt" id="vdd-TX-rbA"/>
+                                    <outlet property="SheepIDLabel" destination="gX0-Sq-Vae" id="BgF-lQ-brC"/>
+                                    <segue destination="EIw-cF-gXc" kind="show" identifier="showDetails" id="W2I-b0-5z1">
+                                        <nil key="action"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Sheep List" id="tht-8O-Zcc">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="tCq-Ck-EgP"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bfr-Ke-wAi">
+                            <connections>
+                                <segue destination="plZ-zb-93P" kind="presentation" identifier="addSheep" id="4me-ST-1og"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FRX-0e-wyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-474" y="-964"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GPz-b5-2c1">
+            <objects>
+                <navigationController id="plZ-zb-93P" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yPp-s2-GXj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fFF-7k-K9q" kind="relationship" relationship="rootViewController" id="1xP-cV-VJd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KNe-NB-w2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846" y="-964"/>
+        </scene>
+        <!--Sheep List-->
+        <scene sceneID="u4k-w4-X4n">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="fFF-7k-K9q" userLabel="Sheep List" customClass="AddSheepsToWorkingSetTVC" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="iCL-xh-efr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SingleSheepCell" id="OPb-za-m7f" customClass="SingleSheepCell" customModule="SheepList_documentBased" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OPb-za-m7f" id="iJ4-gK-Qo7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Add Sheeps To Working Set" id="66E-Ke-djn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="jbZ-9j-AKN">
+                            <connections>
+                                <segue destination="kru-Jp-Fzs" kind="unwind" unwindAction="unwindToWorkingSetWithSegue:" id="GCY-gI-Dhu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q6c-iE-72X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="kru-Jp-Fzs" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1583" y="-964"/>
+        </scene>
+        <!--Working Set-->
+        <scene sceneID="55u-lk-Mtk">
+            <objects>
+                <splitViewController id="Q1i-qZ-UMr" customClass="PrimarySplitViewController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Working Set" id="IMO-v4-zWD"/>
+                    <connections>
+                        <segue destination="CtA-xR-7dg" kind="relationship" relationship="masterViewController" id="wxn-IY-uPZ"/>
+                        <segue destination="EIw-cF-gXc" kind="relationship" relationship="detailViewController" id="hXl-Te-kef"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZdG-up-6Wa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2058" y="-661"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="4me-ST-1og"/>
+        <segue reference="w0h-w2-JhI"/>
+        <segue reference="pux-x7-KVU"/>
+        <segue reference="8Y2-KW-Y8T"/>
+    </inferredMetricsTieBreakers>
+</document>
