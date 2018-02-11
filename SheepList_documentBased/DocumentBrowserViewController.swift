@@ -77,17 +77,38 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         guard let documentVC = storyBoard.instantiateViewController(withIdentifier: "DocumentMVC") as? UITabBarController else {return}
         guard let splitViewController = documentVC.viewControllers?.first as? UISplitViewController else {return}
         guard let sheepListController = splitViewController.viewControllers.first?.childViewControllers.first as? SheepListController else {return}
-        
+        guard let editSheepTVC = splitViewController.viewControllers.last?.childViewControllers.first as? EditSheepTableViewController else {return}
         
         sheepListController.modelC = ModelController()
         sheepListController.modelC.document = SheepDocument(fileURL: documentURL)
         
+        sheepListController.modelC.document?.open { success in
+            if success {
+                sheepListController.sheeps = sheepListController.modelC.document?.sheepList?.sheeps ?? []
+                sheepListController.groups = sheepListController.modelC.document?.sheepList?.groups ?? []
+                editSheepTVC.modelC = sheepListController.modelC
+                if let sheep = sheepListController.sheeps.first {
+                    editSheepTVC.sheep = sheep
+                    editSheepTVC.sheepIndex = 0
+                }
+                editSheepTVC.seguedFrom = "sheepList"
+                sheepListController.tableView.reloadData()
+                editSheepTVC.tableView.reloadData()
+                print("\nDocument opened succesfully \n")
+            }else {
+                fatalError("\nFailed to open document \n")
+            }
+        }
+
         guard let splitViewController2 = documentVC.viewControllers![1] as? UISplitViewController else {return}
         guard let workingSetController = splitViewController2.viewControllers.first?.childViewControllers.first as? WorkingSetController else {return}
         
         workingSetController.modelC = sheepListController.modelC
         
+        guard let splitViewController3 = documentVC.viewControllers![2] as? UISplitViewController else {return}
+        guard let settingsController = splitViewController3.viewControllers.first?.childViewControllers.first as? SettingsTVC else {return}
         
+        settingsController.documentBrowserVC = self
         
         present(documentVC, animated: true)
     }

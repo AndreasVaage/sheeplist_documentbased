@@ -23,16 +23,6 @@ class SheepListController: SheepTableVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        modelC.document?.open { success in
-            if success {
-                self.sheeps = self.modelC.document?.sheepList?.sheeps ?? []
-                self.groups = self.modelC.document?.sheepList?.groups ?? []
-                self.tableView.reloadData()
-                print("\nDocument opened succesfully \n")
-            }else {
-                print("\nFailed to open document \n")
-            }
-        }
     }
     func updateViewFromModel() {
         sheeps = modelC.document?.sheepList?.sheeps ?? []
@@ -46,8 +36,8 @@ class SheepListController: SheepTableVC {
 extension SheepListController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetails", let detailedSheepViewController = segue.destination
-            as? DetailedSheepViewController {
+        if segue.identifier == "showDetails", let editSheepTVC = segue.destination.childViewControllers.first
+            as? EditSheepTableViewController {
             
             if searchController.isActive && searchController.searchBar.text != "" {
                 //modelC.sheepGroup = .search
@@ -55,9 +45,10 @@ extension SheepListController {
                 //modelC.sheepGroup = .all
             }
            // modelC.selectedSheep = indexPath.row
-            detailedSheepViewController.modelC = modelC
-            detailedSheepViewController.sheep = sheeps[tableView.indexPathForSelectedRow!.row]
-            detailedSheepViewController.sheepIndex = tableView.indexPathForSelectedRow!.row
+            editSheepTVC.modelC = modelC
+            editSheepTVC.sheep = sheeps[tableView.indexPathForSelectedRow!.row]
+            editSheepTVC.sheepIndex = tableView.indexPathForSelectedRow!.row
+            editSheepTVC.seguedFrom = "sheepList"
         }else if segue.identifier == "newSheep", let addSheeptableVC = (segue.destination as? UINavigationController)?.topViewController as? EditSheepTableViewController {
             
             addSheeptableVC.modelC = modelC

@@ -12,7 +12,7 @@ import UIKit
 class EditSheepTableViewController: UITableViewController {
     
     // MARK: - Table view data source
-    var modelC: ModelController!
+    var modelC: ModelController?
     var sheep = Sheep(sheepID: nil)
     var lambIndex: Int?
     var sheepIndex: Int?
@@ -41,7 +41,7 @@ class EditSheepTableViewController: UITableViewController {
         //modelC.save(sheep: sheep, sheepIndex: sheepIndex, lambIndex: lambIndex)
         // Not needed as Sheep is a reference type
         
-        modelC.dataChanged()
+        modelC?.dataChanged()
     }
     
     @IBAction func addLambButtonPressed(_ sender: UIButton) {
@@ -61,7 +61,7 @@ class EditSheepTableViewController: UITableViewController {
         if lastSugestion == nil {
             if let lastEnteredLambID = sheep.lambs.last?.sheepID {
                 sheepID = String(describing: Int(lastEnteredLambID)! + 1)
-            }else if let lastSavedLambID = modelC.findLastSavedLambID() {
+            }else if let lastSavedLambID = modelC?.findLastSavedLambID() {
                 sheepID = String(describing: Int(lastSavedLambID)! + 1)
             }
         }else{
@@ -72,7 +72,7 @@ class EditSheepTableViewController: UITableViewController {
             sheepID = sheep.lambPrefix + "000"
         }
         
-        while (modelC.document?.sheepList?.allSheepAndLambIDs ?? []).contains(sheepID!) {
+        while (modelC?.document?.sheepList?.allSheepAndLambIDs ?? []).contains(sheepID!) {
             sheepID = String(describing: Int(sheepID!)!+1)
         }
         return sheepID
@@ -135,7 +135,7 @@ class EditSheepTableViewController: UITableViewController {
         }
         deleteAction.backgroundColor = .red
         
-        let groupsSortedByPopularity = modelC.document?.sheepList?.groups.sorted(by: {$0.popularity > $1.popularity} )
+        let groupsSortedByPopularity = modelC?.document?.sheepList?.groups.sorted(by: {$0.popularity > $1.popularity} )
         
         guard let group1 = groupsSortedByPopularity?.first else {return [deleteAction]}
         
@@ -213,7 +213,7 @@ extension EditSheepTableViewController {
                 fatalError("Could not dequeue a cell")
             }
             cell.sheepIDTextField.text = sheep.sheepID
-            cell.sheepIDTextField.textColor = modelC.document?.sheepList?.getMostImportentGroupColor(for: sheep)
+            cell.sheepIDTextField.textColor = modelC?.document?.sheepList?.getMostImportentGroupColor(for: sheep)
             cell.addDoneButtonOnKeyboard()
             cell.sheepIDTextField.delegate = self
             return cell
@@ -246,7 +246,7 @@ extension EditSheepTableViewController {
             }
             cell.lambIDTextField.text = sheep.lambs[indexPath.row].sheepID
             cell.lambIDTextField.delegate = self
-            cell.lambIDTextField.textColor = modelC.document?.sheepList?.getMostImportentGroupColor(for: sheep.lambs[indexPath.row])
+            cell.lambIDTextField.textColor = modelC?.document?.sheepList?.getMostImportentGroupColor(for: sheep.lambs[indexPath.row])
             if let sheepBirthday = sheep.lambs[indexPath.row].birthday {
                 cell.DateLabel.text = Sheep.birthdayFormatter.string(from: sheepBirthday)
             }else{
@@ -420,8 +420,8 @@ extension EditSheepTableViewController {
     
     @IBAction func saveUnwind(_ sender: UIBarButtonItem) {
         switch seguedFrom! {
-        case "detailedSheep":
-            self.performSegue(withIdentifier: "SaveUnwindToDetailedSheep", sender: nil)
+        case "workingSet":
+            self.performSegue(withIdentifier: "UnwindToWorkingSet", sender: nil)
         case "sheepList":
             self.performSegue(withIdentifier: "SaveUnwindToSheepList", sender: nil)
         case "editTheMotherTVC":
@@ -433,8 +433,8 @@ extension EditSheepTableViewController {
     
     @IBAction func cancelUnwind(_ sender: UIBarButtonItem) {
         switch seguedFrom! {
-        case "detailedSheep":
-            self.performSegue(withIdentifier: "cancelUnwindToDetailedSheep", sender: nil)
+        case "workingSet":
+            self.performSegue(withIdentifier: "UnwindToWorkingSet", sender: nil)
         case "sheepList":
             self.performSegue(withIdentifier: "cancelUnwindToSheepList", sender: nil)
         case "editTheMotherTVC":
@@ -454,7 +454,7 @@ extension EditSheepTableViewController {
             //}else{
             chooseGroupTVC.groupMemberships = sheep.groupMemberships
             //}
-            chooseGroupTVC.groups = modelC.document?.sheepList?.groups ?? []
+            chooseGroupTVC.groups = modelC?.document?.sheepList?.groups ?? []
             chooseGroupTVC.delegate = self
             return
         case "editLamb":
@@ -559,7 +559,7 @@ extension EditSheepTableViewController: UITextFieldDelegate {
         }
         let enteredText = textField.text
         
-        guard modelC.sheepIdIsUnique(enteredText) || enteredText == sheep.sheepID || enteredText == sheep.lambs[indexPath.row].sheepID else {
+        guard modelC!.sheepIdIsUnique(enteredText) || enteredText == sheep.sheepID || enteredText == sheep.lambs[indexPath.row].sheepID else {
             presentNotUniqueSheepIDAllert()
             //textField.text = nil
             return false
@@ -569,7 +569,7 @@ extension EditSheepTableViewController: UITextFieldDelegate {
         case sheepSection:
             if sheep.sheepID == nil {
                 sheep.sheepID = enteredText
-                if !modelC.save(sheep: sheep, sheepIndex: sheepIndex, lambIndex: lambIndex){
+                if !modelC!.save(sheep: sheep, sheepIndex: sheepIndex, lambIndex: lambIndex){
                     fatalError("SaveFailed")
                 }
             }
@@ -637,18 +637,18 @@ extension EditSheepTableViewController: ChooseGroupsTVCDelegate {
     }
     
     func changedGroups(to newGroups: [Group]) {
-        modelC.document?.sheepList?.groups = newGroups
+        modelC!.document?.sheepList?.groups = newGroups
         updateModel()
         tableView.reloadData()
     }
     
     func changedGroups(to newGroups: [Group], deleted deletedGroup: Group){
-        for sheep in modelC.everyOneByThemSelf {
+        for sheep in modelC!.everyOneByThemSelf {
             if let indexPath = sheep.groupMemberships.index(of: deletedGroup){
                 sheep.groupMemberships.remove(at: indexPath)
             }
         }
-        modelC.document?.sheepList?.groups = newGroups
+        modelC?.document?.sheepList?.groups = newGroups
         updateModel()
         tableView.reloadData()
     }

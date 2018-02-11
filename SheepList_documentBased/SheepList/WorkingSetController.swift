@@ -31,8 +31,8 @@ class WorkingSetController: SheepTableVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails" {
-            let detailedSheepViewController = segue.destination
-                as! DetailedSheepViewController
+            let detailedSheepViewController = segue.destination.childViewControllers.first
+                as! EditSheepTableViewController
             
             if searchController.isActive && searchController.searchBar.text != "" {
                // modelC.sheepGroup = .search
@@ -44,6 +44,7 @@ class WorkingSetController: SheepTableVC {
             detailedSheepViewController.modelC = modelC
             detailedSheepViewController.sheep = sheep
             detailedSheepViewController.sheepIndex = modelC.sheeps.index(of: sheep)
+            detailedSheepViewController.seguedFrom = "workingSet"
         }else if segue.identifier == "addSheep"{
             
             let addSheeptableNC = segue.destination as! UINavigationController
@@ -53,12 +54,12 @@ class WorkingSetController: SheepTableVC {
             fatalError("Unknown Segue")
         }
     }
-    
+    // MARK: - Navigation
     @IBAction func unwindToWorkingSet(segue: UIStoryboardSegue) {
         sheeps = modelC.workingSet
-        guard segue.identifier == "SaveUnwindToWorkingSet" else { return }
+        guard segue.identifier == "UnwindToWorkingSet" else { return }
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.automatic )
+            //tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.automatic )
         } 
     }
     
