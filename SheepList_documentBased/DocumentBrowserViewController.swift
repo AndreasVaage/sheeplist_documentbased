@@ -31,36 +31,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             allowsDocumentCreation = FileManager.default.createFile(atPath: template!.path, contents: Data())
         }
         
-        if let lastURLbookmark = UserDefaults.standard.data(forKey: "lastUsedURLBookmark"){
-            var isStale = false
-            if let lastURL = try? URL.init(resolvingBookmarkData: lastURLbookmark, options: URL.BookmarkResolutionOptions.withoutMounting , relativeTo: nil, bookmarkDataIsStale: &isStale){
-                
-                // Ensure the URL is a file URL
-                guard let lastURL = lastURL else { return}
-                guard lastURL.isFileURL else {return}
-                
-                do{
-                    let sucsess = try lastURL.checkResourceIsReachable()
-                    print("URL is reacheble: \(sucsess)")
-                }catch {
-                    print(error)
-                    return
-                }
-                
-                
-                self.revealDocument(at: lastURL, importIfNeeded: true) { (revealedDocumentURL, error) in
-                    if let error = error {
-                        // Handle the error appropriately
-                        print("Failed to reveal the document at URL \(lastURL) with error: '\(error)'")
-                        return
-                    }
-                    
-                    // Present the Document View Controller for the revealed URL
-                    self.presentDocument(at: revealedDocumentURL!)
-                }
-            }
-        }
-        
         // Update the style of the UIDocumentBrowserViewController
         // browserUserInterfaceStyle = .dark
         // view.tintColor = .white
@@ -151,4 +121,3 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         present(documentVC, animated: true)
     }
 }
-

@@ -16,6 +16,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if let lastURLbookmark = UserDefaults.standard.data(forKey: "lastUsedURLBookmark"){
+            var isStale = false
+            if let lastURL = try? URL.init(resolvingBookmarkData: lastURLbookmark, options: URL.BookmarkResolutionOptions.withoutMounting , relativeTo: nil, bookmarkDataIsStale: &isStale){
+                
+                // Ensure the URL is a file URL
+                guard let lastURL = lastURL else { return true}
+                guard lastURL.isFileURL else {return true}
+                
+                do{
+                    let sucsess = try lastURL.checkResourceIsReachable()
+                    print("URL is reacheble: \(sucsess)")
+                }catch {
+                    print(error)
+                    return true
+                }
+                guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return false }
+
+                
+                documentBrowserViewController.revealDocument(at: lastURL, importIfNeeded: true) { (revealedDocumentURL, error) in
+                    if let error = error {
+                        // Handle the error appropriately
+                        print("Failed to reveal the document at URL \(lastURL) with error: '\(error)'")
+                        return
+                    }
+                    
+                    // Present the Document View Controller for the revealed URL
+                    documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
+                }
+            }
+        }
         return true
     }
 
@@ -58,10 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Present the Document View Controller for the revealed URL
             documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
         }
-
         return true
     }
-
-
 }
-
