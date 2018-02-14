@@ -167,7 +167,7 @@
         <!--Settings-->
         <scene sceneID="Qi0-tz-qjP">
             <objects>
-                <splitViewController id="Mco-R0-WFw" sceneMemberID="viewController">
+                <splitViewController id="Mco-R0-WFw" customClass="PrimarySplitViewController" customModule="SheepList_documentBased" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="NCh-cw-99R"/>
                     <connections>
                         <segue destination="DMa-tZ-9Fh" kind="relationship" relationship="masterViewController" id="zB2-n2-G4b"/>

@@ -42,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E1365A2C2031CF9300796AD0 /* SheepList_documentBased.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SheepList_documentBased.entitlements; sourceTree = "<group>"; };
 		E1A6E4801FF7021F00423EF0 /* Sheep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheep.swift; sourceTree = "<group>"; };
 		E1A6E4821FF7CF5D00423EF0 /* EditSheepTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSheepTableViewController.swift; sourceTree = "<group>"; };
 		E1A6E4831FF7CF5D00423EF0 /* EditSheepTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSheepTableViewCell.swift; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 		E1F1AB331FD5BEFA009FA198 /* SheepList_documentBased */ = {
 			isa = PBXGroup;
 			children = (
+				E1365A2C2031CF9300796AD0 /* SheepList_documentBased.entitlements */,
 				E1F1AB341FD5BEFA009FA198 /* AppDelegate.swift */,
 				E1F1AB361FD5BEFA009FA198 /* DocumentBrowserViewController.swift */,
 				E1F1AB3C1FD5BEFA009FA198 /* Main.storyboard */,
@@ -194,6 +196,11 @@
 					E1F1AB301FD5BEFA009FA198 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

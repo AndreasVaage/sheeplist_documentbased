@@ -112,8 +112,8 @@ class SettingsTVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier ?? "" {
         case "DetailedSetting":
-            let destination = segue.destination as! UINavigationController
-            destination.performSegue(withIdentifier: "editGroups", sender: nil)
+            let destination = segue.destination.childViewControllers.first as! DetailedSettings
+            destination.setting = setting
         default:
             return
         }
