@@ -9,15 +9,72 @@
 import UIKit
 
 class SheepTableVC: UITableViewController {
+    
+    // Used as a parentclass for displaying a list of sheeps. Only does the
+    // visualization. Adding, deleting and editing must be done by the class
+    // inheritating.
+    
     var sheeps = [Sheep]()
     var groups = [Group]()
     var filteredSheeps = [Sheep]()
+    var shouldDisplayLambs = true
+    var setLabelEdgeColor: ((Sheep) -> UIColor?)?
+    var setLabelBackGroundColor: ((Sheep) -> UIColor?)?
     let searchController = UISearchController(searchResultsController: nil)
     
     func deleteSheep(at index: Int){
         fatalError("Must override deleteSheep function")
     }
     
+    
+    
+    @IBAction func sortButtonPressed(_ sender: Any) {
+        let chooseSortCrtiterium = UIAlertController(
+            title: "Sort by:",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        // Spesify where it will pop up when used on large screens
+        chooseSortCrtiterium.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        
+        chooseSortCrtiterium.addAction(UIAlertAction(
+            title: "Groups",
+            style: .default,
+            handler: {action in
+                self.sheeps.sort(by:{
+                    guard let first = self.getHighestPriorityGroup(of: $0) else { return false}
+                    guard let second = self.getHighestPriorityGroup(of: $1) else { return true}
+                    return self.groups.first(where: {$0 == first || $0 == second}) == first
+                })
+                self.tableView.reloadData()
+        }))
+        chooseSortCrtiterium.addAction(UIAlertAction(
+            title: "Lamb ID",
+            style: .default,
+            handler: { action in
+                self.sheeps.sort(by:{
+                    guard let first = $0.lambs.first?.sheepID else { return false}
+                    guard let second = $1.lambs.first?.sheepID else {return true}
+                    return first < second
+                })
+                self.tableView.reloadData()
+        }))
+        chooseSortCrtiterium.addAction(UIAlertAction(
+            title: "Sheep ID",
+            style: .default,
+            handler: { action in
+                self.sheeps.sort(by: {$0.sheepID! < $1.sheepID!})
+                self.tableView.reloadData()
+        }))
+        chooseSortCrtiterium.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        ))
+        present(chooseSortCrtiterium, animated: true)
+    }
+    
+    @IBOutlet weak var sortButton: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,48 +116,65 @@ class SheepTableVC: UITableViewController {
         }else{
             sheep = sheeps[indexPath.row]
         }
-        
         cell.SheepIDLabel?.text = sheep.sheepID
         cell.SheepIDLabel.textColor = getHighestPriorityGroup(of: sheep)?.color
-        
-        
+        addCustomDisplayFeature(to: cell.SheepIDLabel, for: sheep)
         for (index,lamb) in sheep.lambs.enumerated() {
+            guard shouldDisplayLambs else {break}
+            
             if cell.LambStackView.subviews.count > index{
-                let labelView = cell.LambStackView.arrangedSubviews[index] as! UILabel
-                labelView.text = lamb.sheepID
-                labelView.textColor = getHighestPriorityGroup(of: lamb)?.color
-            }else{
-                let label = UILabel()
+                let label = cell.LambStackView.arrangedSubviews[index] as! PaddingLabel
                 label.text = lamb.sheepID
                 label.textColor = getHighestPriorityGroup(of: lamb)?.color
+                addCustomDisplayFeature(to: label, for: lamb)
+            }else{
+                let label = PaddingLabel()
+                label.text = lamb.sheepID
+                label.textColor = getHighestPriorityGroup(of: lamb)?.color
+                addCustomDisplayFeature(to: label, for: lamb)
                 cell.LambStackView.addArrangedSubview(label)
             }
         }
-        let overCount = cell.LambStackView.subviews.count - sheep.lambs.count
-        if (overCount) > 0 {
-            for index in (sheep.lambs.count...cell.LambStackView.subviews.count-1).reversed() {
+        
+        var desiredNumberOfSubviews = sheep.lambs.count
+        if !shouldDisplayLambs{
+            desiredNumberOfSubviews = 0
+        }
+        if cell.LambStackView.subviews.count > desiredNumberOfSubviews {
+            for index in (desiredNumberOfSubviews...cell.LambStackView.subviews.count-1).reversed() {
                 let view = cell.LambStackView.arrangedSubviews[index]
                 view.removeFromSuperview()
             }
-            
-        }
-        guard((sheep.lambs.count == cell.LambStackView.subviews.count) && (sheep.lambs.count == cell.LambStackView.arrangedSubviews.count)) else{
-            fatalError("lamb count dont match viewed lambcount")
         }
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         return cell
+    }
+    
+    func addCustomDisplayFeature(to label: PaddingLabel, for sheep: Sheep){
+        
+        if let color = setLabelEdgeColor?(sheep)?.cgColor {
+            label.layer.borderWidth = 1
+            label.layer.cornerRadius = 5.0
+            label.layer.borderColor = color
+        }else{
+            label.layer.borderColor = nil
+            label.layer.borderWidth = 0.0
+            label.layer.cornerRadius = 0.0
+        }
+        
+        if let color = setLabelBackGroundColor?(sheep){
+            label.backgroundColor = color
+        }else{
+            label.backgroundColor = .white
+        }
+        //label.backgroundColor = setColorBasedOn?(sheep) ?? .white
     }
     
     func getHighestPriorityGroup(of sheep: Sheep) -> Group? {
         if sheep.groupMemberships == []{
             return nil
         }
-        for group in groups {
-            if sheep.groupMemberships.contains(group){
-                return group
-            }
-        }
-        return nil
+        return groups.first(where: {sheep.groupMemberships.contains($0)})
     }
     
     // MARK: - Editing
@@ -137,6 +211,7 @@ extension SheepTableVC: UISearchResultsUpdating{
             }
             return subSecuence(is: searchText.lowercased(), subSecuenceOff: sheep.sheepID!.lowercased())
         }
+        
         tableView.reloadData()
     }
     

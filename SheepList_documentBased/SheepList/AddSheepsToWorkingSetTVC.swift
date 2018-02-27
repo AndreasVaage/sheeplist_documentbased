@@ -10,18 +10,20 @@ import UIKit
 
 class AddSheepsToWorkingSetTVC: SheepTableVC {
     var modelC: ModelController!
-
+    
     override func viewDidLoad() {
-        sheeps = modelC.sheeps
+        sheeps = modelC.everyOneByThemSelf
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = .none
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         modelC.document?.sheepList?.workingSet.append(sheeps[indexPath.row])
+        modelC.dataChanged()
     }
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         modelC.document?.sheepList?.workingSet.remove(at: modelC.workingSet.index(of: sheeps[indexPath.row])!)
+        modelC.dataChanged()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,5 +44,5 @@ class AddSheepsToWorkingSetTVC: SheepTableVC {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.setSelected(modelC.workingSet.contains(sheeps[indexPath.row]), animated: false)
     }
-
+    
 }

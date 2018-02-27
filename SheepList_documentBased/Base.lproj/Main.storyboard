@@ -239,14 +239,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FG-mF-b6z">
-                                            <rect key="frame" x="24" y="36.5" width="52.5" height="26.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FG-mF-b6z" customClass="PaddingLabel" customModule="SheepList_documentBased" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="36.5" width="58.5" height="26.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="4mo-Hx-2v9">
-                                            <rect key="frame" x="276.5" y="11" width="74.5" height="78"/>
+                                            <rect key="frame" x="282.5" y="11" width="68.5" height="78"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -275,12 +289,22 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sheep List" id="Tuu-BS-1Bx">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="nxw-jw-aSl"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="B48-0y-0fi">
-                            <connections>
-                                <segue destination="aZB-Vb-LP1" kind="presentation" identifier="newSheep" id="Ul3-G0-d4M"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="B48-0y-0fi">
+                                <connections>
+                                    <segue destination="aZB-Vb-LP1" kind="presentation" identifier="newSheep" id="Ul3-G0-d4M"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Sort" id="Cjy-UA-Nbc">
+                                <connections>
+                                    <action selector="sortButtonPressed:" destination="jKf-eq-3hT" id="Bff-b6-4Gw"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="sortButton" destination="Cjy-UA-Nbc" id="1IZ-f6-XuK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehn-cI-GgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -713,14 +737,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX0-Sq-Vae">
-                                            <rect key="frame" x="24" y="36.5" width="52.5" height="26.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX0-Sq-Vae" customClass="PaddingLabel" customModule="SheepList_documentBased" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="36.5" width="58.5" height="26.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="dM8-jw-8Nt">
-                                            <rect key="frame" x="276.5" y="11" width="74.5" height="78"/>
+                                            <rect key="frame" x="282.5" y="11" width="68.5" height="78"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -744,12 +768,26 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sheep List" id="tht-8O-Zcc">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="tCq-Ck-EgP"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bfr-Ke-wAi">
-                            <connections>
-                                <segue destination="plZ-zb-93P" kind="presentation" identifier="addSheep" id="4me-ST-1og"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="edit" id="tCq-Ck-EgP"/>
+                            <barButtonItem title="More" id="tiP-wb-RSe">
+                                <connections>
+                                    <action selector="moreButtonTapped:" destination="l6d-1w-l4O" id="cGC-8y-VBU"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="bfr-Ke-wAi">
+                                <connections>
+                                    <segue destination="plZ-zb-93P" kind="presentation" identifier="addSheep" id="4me-ST-1og"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Sort" id="8Og-NK-ZzA">
+                                <connections>
+                                    <action selector="sortButtonPressed:" destination="l6d-1w-l4O" id="1wT-zg-GKv"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRX-0e-wyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -840,7 +878,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="4me-ST-1og"/>
         <segue reference="QLc-Mp-sCW"/>
-        <segue reference="Ul3-G0-d4M"/>
+        <segue reference="zr3-AA-ua9"/>
         <segue reference="pux-x7-KVU"/>
     </inferredMetricsTieBreakers>
 </document>

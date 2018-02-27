@@ -8,7 +8,8 @@
 
 import UIKit
 
-class Sheep: NSObject, Codable {
+class Sheep: Equatable, Codable, NSCopying {
+    
     var sheepID: String?
     var birthday: Date?
     var notes: String?
@@ -21,6 +22,7 @@ class Sheep: NSObject, Codable {
     var groupMemberships: [Group]
     var female = true
     var weightings = [Weigthing(weight: 40.5)]
+    
     var earlierYears = [Int:Sheep]()
     
     let lambPrefix = "70"
@@ -61,6 +63,51 @@ class Sheep: NSObject, Codable {
         }
         
         return true
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Sheep(sheepID: sheepID, birthday: birthday, motherID: motherID, fatherID: fatherID)
+        copy.notes = notes
+        copy.lambs = lambs.map {$0.copy() as! Sheep}
+        copy.biologicalMotherID = biologicalMotherID
+        copy.female = female
+        copy.assumedNumberOfLambs = assumedNumberOfLambs
+        copy.ramID = ramID
+        copy.groupMemberships = groupMemberships
+        copy.weightings = weightings
+        copy.earlierYears = earlierYears
+        return copy
+    }
+    
+    func setValues(equal sheep: Sheep){
+        sheepID = sheep.sheepID
+        birthday = sheep.birthday
+        motherID = sheep.motherID
+        fatherID = sheep.fatherID
+        notes = sheep.notes
+        lambs = sheep.lambs.map {$0.copy() as! Sheep}
+        biologicalMotherID = sheep.biologicalMotherID
+        female = sheep.female
+        assumedNumberOfLambs = sheep.assumedNumberOfLambs
+        ramID = sheep.ramID
+        groupMemberships = sheep.groupMemberships
+        weightings = sheep.weightings
+        earlierYears = sheep.earlierYears
+    }
+    static func ==(lhs: Sheep, rhs: Sheep) -> Bool {
+        return (lhs.sheepID == rhs.sheepID &&
+            lhs.birthday == rhs.birthday &&
+            lhs.motherID == rhs.motherID &&
+            lhs.fatherID == rhs.fatherID &&
+            lhs.notes == rhs.notes &&
+            lhs.lambs.elementsEqual(rhs.lambs, by: {$0 == $1}) &&
+            lhs.biologicalMotherID == rhs.biologicalMotherID &&
+            lhs.female == rhs.female &&
+            lhs.assumedNumberOfLambs == rhs.assumedNumberOfLambs &&
+            lhs.ramID == rhs.ramID &&
+            lhs.groupMemberships == rhs.groupMemberships &&
+            lhs.weightings == rhs.weightings &&
+            lhs.earlierYears == rhs.earlierYears)
     }
     
     static let birthdayFormatter: DateFormatter = {

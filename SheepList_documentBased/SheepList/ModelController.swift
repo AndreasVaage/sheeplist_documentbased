@@ -95,12 +95,13 @@ class ModelController{
         }
         guard document?.sheepList?.sheeps != nil else {return false}
         
-        if let sheepIndex = sheepIndex {
-            if let lambIndex = lambIndex {
-                document?.sheepList?.sheeps?[sheepIndex].lambs[lambIndex] = sheep
-            }else{
-                document?.sheepList?.sheeps?[sheepIndex] = sheep
-            }
+        if let _ = sheepIndex {
+            fatalError("Deprecated functionality")
+            //if let lambIndex = lambIndex {
+            //    document?.sheepList?.sheeps?[sheepIndex].lambs[lambIndex] = sheep
+            //}else{
+            //    document?.sheepList?.sheeps?[sheepIndex] = sheep
+            //}
             
         }else{
             document?.sheepList?.sheeps?.append(sheep)

@@ -38,16 +38,16 @@ extension SheepListController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails", let editSheepTVC = segue.destination.childViewControllers.first
             as? EditSheepTableViewController {
-            
+            editSheepTVC.modelC = modelC
             if searchController.isActive && searchController.searchBar.text != "" {
-                //modelC.sheepGroup = .search
+                editSheepTVC.sheep = filteredSheeps[tableView.indexPathForSelectedRow!.row].copy() as! Sheep
+                editSheepTVC.sheepReference = filteredSheeps[tableView.indexPathForSelectedRow!.row]
             }else{
-                //modelC.sheepGroup = .all
+                editSheepTVC.sheep = sheeps[tableView.indexPathForSelectedRow!.row].copy() as! Sheep
+                editSheepTVC.sheepReference = sheeps[tableView.indexPathForSelectedRow!.row]
             }
            // modelC.selectedSheep = indexPath.row
-            editSheepTVC.modelC = modelC
-            editSheepTVC.sheep = sheeps[tableView.indexPathForSelectedRow!.row]
-            editSheepTVC.sheepIndex = tableView.indexPathForSelectedRow!.row
+            
             editSheepTVC.seguedFrom = "sheepList"
         }else if segue.identifier == "newSheep", let addSheeptableVC = (segue.destination as? UINavigationController)?.topViewController as? EditSheepTableViewController {
             

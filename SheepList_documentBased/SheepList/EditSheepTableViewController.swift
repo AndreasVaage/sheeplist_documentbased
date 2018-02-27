@@ -13,6 +13,7 @@ class EditSheepTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     var modelC: ModelController?
+    var sheepReference: Sheep?
     var sheep = Sheep(sheepID: nil)
     var lambIndex: Int?
     var sheepIndex: Int?
@@ -54,6 +55,7 @@ class EditSheepTableViewController: UITableViewController {
         updateLambHeader()
         updateLambFooter()
         tableView.scrollToBottom(ofSection: lambSection)
+        updateSaveButtonState()
     }
     
     func suggestLambID(lastSugestion: String?) -> String? {
@@ -88,7 +90,6 @@ class EditSheepTableViewController: UITableViewController {
         self.hideKeyboardWhenTappedAround()
         updateSaveButtonState()
         updateLambFooter()
-        
         numberOfLambIdGuesses = Array(repeating: 1, count: sheep.lambs.count)
     }
     
@@ -128,10 +129,10 @@ class EditSheepTableViewController: UITableViewController {
         let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (rowAction, indexPath) in
             self.sheep.lambs.remove(at: indexPath.row)
             self.numberOfLambIdGuesses.remove(at: indexPath.row)
-            self.updateModel()
             self.tableView.deleteRows(at: [indexPath], with: .fade)
             self.updateLambHeader()
             self.updateLambFooter()
+            self.updateSaveButtonState()
         }
         deleteAction.backgroundColor = .red
         
@@ -146,21 +147,21 @@ class EditSheepTableViewController: UITableViewController {
             }else {
                 self.sheep.lambs[indexPath.row].groupMemberships.append(group1)
             }
-            self.updateModel()
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             //let cell = self.tableView.cellForRow(at: indexPath) as! LambCell
             //cell.lambIDTextField.textColor = group1.color
-            group1.popularity += 1
+            group1.increasePopularity()
             self.tableView.endEditing(true)
             self.tableView.setEditing(false, animated: true)
+            self.updateSaveButtonState()
         }
         editAction.backgroundColor = group1.color
         
         let moreAcction = UITableViewRowAction(style: .default, title: "More") { (rowAction, indexPath) in
             let choseGroupAction = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                choseGroupAction.addAction(UIAlertAction(title: "Print Year", style: .default, handler: {action in
+            choseGroupAction.addAction(UIAlertAction(title: "Print Year", style: .default, handler: {action in
                 //self.performSegue(withIdentifier: "chooseGroup", sender: self.sheep.lambs[indexPath.row])
-                    print("Born in: \(self.sheep.birthday?.getYear() ?? -1)")
+                print("Born in: \(self.sheep.birthday?.getYear() ?? -1)")
                 self.tableView.endEditing(true)
                 self.tableView.setEditing(false, animated: true)
             }))
@@ -172,7 +173,7 @@ class EditSheepTableViewController: UITableViewController {
     }
     
     func updateSaveButtonState() {
-        if Sheep.isCorrectFormat(for: sheep) && isEnteringID == false{
+        if Sheep.isCorrectFormat(for: sheep) && isEnteringID == false && sheepReference != sheep{
             saveButton.isEnabled = true
         }else{
             saveButton.isEnabled = false
@@ -373,7 +374,7 @@ extension EditSheepTableViewController {
         if let date = date{
             cell.dateLabel.text = Sheep.birthdayFormatter.string(from: date)
             sheep.birthday = date
-            updateModel()
+            updateSaveButtonState()
         }else{
             cell.dateLabel.text = "Unknown"
         }
@@ -419,6 +420,16 @@ extension EditSheepTableViewController {
     }
     
     @IBAction func saveUnwind(_ sender: UIBarButtonItem) {
+        
+        if sheepReference == nil {
+            guard modelC!.save(sheep: sheep, sheepIndex: sheepIndex, lambIndex: lambIndex) else{
+                fatalError("Failed to save sheep")
+            }
+        }else{
+            sheepReference?.setValues(equal: sheep)
+        }
+        updateModel()
+        
         switch seguedFrom! {
         case "workingSet":
             self.performSegue(withIdentifier: "UnwindToWorkingSet", sender: nil)
@@ -461,15 +472,11 @@ extension EditSheepTableViewController {
             let editSheepTVC = segue.destination as! EditSheepTableViewController
             let indexPath = tableView.indexPathForSelectedRow!
             editSheepTVC.modelC = modelC
-            editSheepTVC.sheep = sheep.lambs[indexPath.row]
+            editSheepTVC.sheep = sheep.lambs[indexPath.row].copy() as! Sheep
+            editSheepTVC.sheepReference = sheep.lambs[indexPath.row]
             editSheepTVC.lambIndex = indexPath.row
             editSheepTVC.sheepIndex = sheepIndex
             editSheepTVC.seguedFrom = "editTheMotherTVC"
-            return
-        case "SaveUnwindToDetailedSheep":
-            guard Sheep.isCorrectFormat(for: sheep) else {
-                fatalError("Trying to save sheep with wrong format")
-            }
             return
         case "SaveUnwindToSheepList":
             guard Sheep.isCorrectFormat(for: sheep) else {
@@ -501,13 +508,31 @@ extension EditSheepTableViewController {
         }))
         present(alert, animated: true)
     }
+    func presentSheepIDDoesnExistAllert(sheepID: String){
+        let alert = UIAlertController(
+            title: "Sheep ID does not exists",
+            message: "Do you want to register ID: \(sheepID)?",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        ))
+        alert.addAction(UIAlertAction(
+            title: "Register SheepID* ",
+            style: .destructive,
+            handler: { action in
+                print("\nYOU DID SOMEtHING! :O \n")
+        }))
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - NotesTextView
 extension EditSheepTableViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         sheep.notes = textView.text
-        updateModel()
+        updateSaveButtonState()
         tableView.beginUpdates()
         tableView.endUpdates()
     }
@@ -531,6 +556,7 @@ extension EditSheepTableViewController: UITextFieldDelegate {
                 textField.text = "F"
                 sheep.female = true
             }
+            updateSaveButtonState()
             return false
         }
         
@@ -538,6 +564,7 @@ extension EditSheepTableViewController: UITextFieldDelegate {
             let suggestedID = suggestLambID(lastSugestion: textField.text)
             textField.text = suggestedID
             sheep.lambs[indexPath.row].sheepID = suggestedID
+            updateSaveButtonState()
             numberOfLambIdGuesses[indexPath.row] += 1;
             return false
         }else {
@@ -557,30 +584,34 @@ extension EditSheepTableViewController: UITextFieldDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else {
             fatalError("Unknown indexpath")
         }
-        let enteredText = textField.text
-        
-        guard modelC!.sheepIdIsUnique(enteredText) || enteredText == sheep.sheepID || enteredText == sheep.lambs[indexPath.row].sheepID else {
-            presentNotUniqueSheepIDAllert()
-            //textField.text = nil
-            return false
-        }
+        guard let enteredText = textField.text else { return true}
+        guard enteredText != "" else {return true}
         
         switch indexPath.section {
         case sheepSection:
-            if sheep.sheepID == nil {
-                sheep.sheepID = enteredText
-                if !modelC!.save(sheep: sheep, sheepIndex: sheepIndex, lambIndex: lambIndex){
-                    fatalError("SaveFailed")
-                }
+            guard modelC!.sheepIdIsUnique(enteredText) || enteredText == sheep.sheepID else {
+                presentNotUniqueSheepIDAllert()
+                //textField.text = nil
+                return false
             }
             sheep.sheepID = enteredText
         case lambSection:
+            guard modelC!.sheepIdIsUnique(enteredText) || enteredText == sheep.lambs[indexPath.row].sheepID else {
+                presentNotUniqueSheepIDAllert()
+                //textField.text = nil
+                return false
+            }
             sheep.lambs[indexPath.row].sheepID = enteredText
         case familySection:
+            guard !modelC!.sheepIdIsUnique(enteredText) else {
+                presentSheepIDDoesnExistAllert(sheepID: enteredText)
+                return false
+            }
             switch indexPath.row {
             case 0:
                 sheep.motherID = enteredText
             case 1:
+                
                 sheep.biologicalMotherID = enteredText
             case 2:
                 sheep.fatherID = enteredText
@@ -590,13 +621,12 @@ extension EditSheepTableViewController: UITextFieldDelegate {
                 fatalError("Not correct amount of family members")
             }
         case weightSection:
-            sheep.weightings[indexPath.row].weight = (enteredText?.floatValue)!
+            sheep.weightings[indexPath.row].weight = enteredText.floatValue
         default:
             fatalError("Section should not have a textfield")
         }
         isEnteringID = false
         updateSaveButtonState()
-        updateModel()
         return true
     }    
 }
@@ -626,13 +656,8 @@ extension EditSheepTableViewController: UICollectionViewDelegate, UICollectionVi
 
 extension EditSheepTableViewController: ChooseGroupsTVCDelegate {
     func didSelect(_ groupMemberships: [Group]){
-        //guard let indexpath = self.tableView.indexPathForSelectedRow else { fatalError("Not able to determine where to save group")}
-        //if indexpath.section == lambSection{
-        //    self.sheep.lambs[indexpath.row].groupMemberships = groupMemberships
-        //}else{
-            self.sheep.groupMemberships = groupMemberships
-        //}
-        updateModel()
+        self.sheep.groupMemberships = groupMemberships
+        self.updateSaveButtonState()
         tableView.reloadData()
     }
     
@@ -676,6 +701,7 @@ extension UIViewController {
     }
 }
 
+
 extension Date {
     
     func getYear() -> Int {
@@ -691,6 +717,7 @@ extension Date {
     }
 }
 
+// make String recongnise comma as decimal seperator when converging to float
 extension String {
     var floatValue: Float {
         let nf = NumberFormatter()
