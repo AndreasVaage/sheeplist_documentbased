@@ -71,7 +71,7 @@ class WorkingSetController: SheepTableVC {
                     }
                 }
             }else{
-                if let mother = modelC.document?.sheepList?.sheeps?.first(where: {$0.sheepID  == sheep.motherID}),
+                if let mother = sheep.mother,
                     !sheeps.contains(mother),
                     !missingSheeps.contains(mother){
                     missingSheeps.append(mother)

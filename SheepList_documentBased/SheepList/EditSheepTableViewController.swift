@@ -48,8 +48,8 @@ class EditSheepTableViewController: UITableViewController {
     @IBAction func addLambButtonPressed(_ sender: UIButton) {
         let newIndexPath = IndexPath(row: sheep.lambs.count ,section: lambSection)
         
-        sheep.lambs.append(Sheep(sheepID: suggestLambID(lastSugestion: nil), birthday: Date(), motherID: sheep.sheepID, fatherID: sheep.ramID))
-        sheep.lambs.last?.biologicalMotherID = sheep.sheepID
+        sheep.lambs.append(Sheep(sheepID: suggestLambID(lastSugestion: nil), birthday: Date(), mother: sheep, father: sheep.ram))
+        sheep.lambs.last?.biologicalMother = sheep
         numberOfLambIdGuesses.append(0)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
         updateLambHeader()
@@ -173,7 +173,7 @@ class EditSheepTableViewController: UITableViewController {
     }
     
     func updateSaveButtonState() {
-        if Sheep.isCorrectFormat(for: sheep) && isEnteringID == false && sheepReference != sheep{
+        if sheep.isCorrectFormat() && isEnteringID == false && sheepReference != sheep{
             saveButton.isEnabled = true
         }else{
             saveButton.isEnabled = false
@@ -285,16 +285,28 @@ extension EditSheepTableViewController {
             switch indexPath.row {
             case 0:
                 cell.label.text = "Mother ID"
-                cell.textField.text = sheep.motherID
+                if let mother = sheep.mother {
+                    cell.textField.text = mother.sheepID
+                    cell.textField.textColor = modelC?.document?.sheepList?.getMostImportentGroupColor(for: mother)
+                }
             case 1:
                 cell.label.text = "Biological Mother ID"
-                cell.textField.text = sheep.biologicalMotherID
+                if let biologicalMother = sheep.biologicalMother {
+                    cell.textField.text = biologicalMother.sheepID
+                    cell.textField.textColor = modelC?.document?.sheepList?.getMostImportentGroupColor(for: biologicalMother)
+                }
             case 2:
                 cell.label.text = "Father ID"
-                cell.textField.text = sheep.fatherID
+                if let father = sheep.father {
+                    cell.textField.text = father.sheepID
+                    cell.textField.textColor = modelC?.document?.sheepList?.getMostImportentGroupColor(for: father)
+                }
             case 3:
                 cell.label.text = "Ram ID"
-                cell.textField.text = sheep.ramID
+                if let ram = sheep.ram {
+                    cell.textField.text = ram.sheepID
+                    cell.textField.textColor = modelC?.document?.sheepList?.getMostImportentGroupColor(for: ram)
+                }
             default:
                 fatalError("Not correct amount of family members")
             }
@@ -479,7 +491,7 @@ extension EditSheepTableViewController {
             editSheepTVC.seguedFrom = "editTheMotherTVC"
             return
         case "SaveUnwindToSheepList":
-            guard Sheep.isCorrectFormat(for: sheep) else {
+            guard sheep.isCorrectFormat() else {
                 fatalError("Trying to save sheep with wrong format")
             }
             return
@@ -609,14 +621,14 @@ extension EditSheepTableViewController: UITextFieldDelegate {
             }
             switch indexPath.row {
             case 0:
-                sheep.motherID = enteredText
+                sheep.mother?.sheepID = enteredText
             case 1:
                 
-                sheep.biologicalMotherID = enteredText
+                sheep.biologicalMother?.sheepID = enteredText
             case 2:
-                sheep.fatherID = enteredText
+                sheep.father?.sheepID = enteredText
             case 3:
-                sheep.ramID = enteredText
+                sheep.ram?.sheepID = enteredText
             default:
                 fatalError("Not correct amount of family members")
             }

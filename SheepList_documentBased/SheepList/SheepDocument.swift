@@ -12,13 +12,13 @@ class SheepDocument: UIDocument {
     var sheepList: SheepList?
     
     override func contents(forType typeName: String) throws -> Any {
-        return sheepList?.json ?? Data()
+        return sheepList?.data ?? Data()
     }
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         // Load your document from contents
-        if let json = contents as? Data {
-            if let sheepList = try? JSONDecoder().decode(SheepList.self, from: json) {
+        if let data = contents as? Data {
+            if let sheepList = NSKeyedUnarchiver.unarchiveObject(with: data) as? SheepList {
                 self.sheepList = sheepList
             }else{
                 self.sheepList = nil
