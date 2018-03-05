@@ -12,16 +12,37 @@ class SheepDocument: UIDocument {
     var sheepList: SheepList?
     
     override func contents(forType typeName: String) throws -> Any {
-        return sheepList?.data ?? Data()
+        for sheep in sheepList?.sheeps ?? [] {
+            sheep._biologicalMother = sheep.biologicalMother?.sheepID
+            sheep._father = sheep.father?.father?.sheepID
+            sheep._ram = sheep.ram?.sheepID
+            for lamb in sheep.lambs{
+                lamb._biologicalMother = lamb.biologicalMother?.sheepID
+                lamb._father = lamb.father?.father?.sheepID
+                lamb._ram = lamb.ram?.sheepID
+            }
+        }
+        do {
+            return try JSONEncoder().encode(sheepList)
+        } catch  {
+            print(error)
+            return Data()
+        }
     }
+    
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         // Load your document from contents
         if let data = contents as? Data {
-            if let sheepList = NSKeyedUnarchiver.unarchiveObject(with: data) as? SheepList {
-                self.sheepList = sheepList
-            }else{
-                self.sheepList = nil
+            sheepList = try? JSONDecoder().decode(SheepList.self, from: data)
+            
+            for sheep in sheepList?.sheeps ?? [] {
+                sheep.biologicalMother = 
+                sheep.father =
+                sheep.ram = 
+                for lamb in sheep.lambs{
+                    lamb.mother = sheep
+                }
             }
         }
     }

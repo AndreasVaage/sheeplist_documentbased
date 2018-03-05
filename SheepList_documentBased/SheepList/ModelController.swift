@@ -81,7 +81,7 @@ class ModelController{
     
     func delete(sheep: Sheep) {
         if let index = sheeps.index(of: sheep){
-            document?.sheepList?.sheeps?.remove(at: index)
+            document?.sheepList?.sheeps.remove(at: index)
             dataChanged()
         }else{
             fatalError("Trying to delete sheep which does not exist")
@@ -104,7 +104,7 @@ class ModelController{
             //}
             
         }else{
-            document?.sheepList?.sheeps?.append(sheep)
+            document?.sheepList?.sheeps.append(sheep)
         }
         dataChanged()
         return true

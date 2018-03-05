@@ -8,28 +8,54 @@
 
 import UIKit
 
-class Sheep: NSObject {
+class Sheep: Equatable, Codable{
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case sheepID
+        case birthday
+        case notes
+        case lambs
+        //case mother
+        //case biologicalMother
+        case father
+        case ram
+        case assumedNumberOfLambs
+        case groupMemberships
+        case female
+        case weightings
+        case _biologicalMother
+        case _father
+        case _ram
+    }
     
     var sheepID: String?
     var birthday: Date?
     var notes: String?
     var lambs: [Sheep]
-    var mother: Sheep?
-    var biologicalMother: Sheep?
+    var mother: Sheep? = nil
+    var biologicalMother: Sheep? = nil
     var father: Sheep?
     var ram: Sheep?
     var assumedNumberOfLambs = 0
-    var groupMemberships = [Group]()
+    var groupMemberships: [Group]
     var female = true
     var weightings = [Weigthing(weight: 40.5)]
     
-    var earlierYears = [Int:Sheep]()
+    //var earlierYears = [Int:Sheep]()
     
     let lambPrefix = "70"
+    
+    // internal variables to store references in a JSON
+    var _biologicalMother: String?
+    var _father: String?
+    var _ram: String?
+    
     
     init(sheepID: String?) {
         self.sheepID = sheepID
         self.lambs = []
+        self.groupMemberships = []
     }
     convenience init(sheepID: String?, birthday: Date?) {
         self.init(sheepID: sheepID)
@@ -39,31 +65,6 @@ class Sheep: NSObject {
         self.init(sheepID: sheepID, birthday: birthday)
         self.mother = mother
         self.father = father
-    }
-    required init?(coder aDecoder: NSCoder) {
-        sheepID = aDecoder.decodeObject(forKey: Keys.sheepID) as? String
-        birthday = aDecoder.decodeObject(forKey: Keys.birthday) as? Date
-        notes = aDecoder.decodeObject(forKey: Keys.notes) as? String
-        lambs = aDecoder.decodeObject(forKey: Keys.lambs) as? [Sheep] ?? []
-        mother = aDecoder.decodeObject(forKey: Keys.mother) as? Sheep
-        biologicalMother = aDecoder.decodeObject(forKey: Keys.biologicalMother) as? Sheep
-        father = aDecoder.decodeObject(forKey: Keys.father) as? Sheep
-        ram = aDecoder.decodeObject(forKey: Keys.ram) as? Sheep
-        if let assumedNumberOfLambs = aDecoder.decodeObject(forKey: Keys.assumedNumberOfLambs) as? Int {
-            self.assumedNumberOfLambs = assumedNumberOfLambs
-        }
-        if let groupMemberships = aDecoder.decodeObject(forKey: Keys.groupMemberships) as? [Group] {
-            self.groupMemberships = groupMemberships
-        }
-        if let female = aDecoder.decodeObject(forKey: Keys.female) as? Bool {
-            self.female = female
-        }
-        if let weightings = aDecoder.decodeObject(forKey: Keys.weightings) as? [Weigthing]{
-            self.weightings = weightings
-        }
-        if let earlierYears = aDecoder.decodeObject(forKey: Keys.earlierYears) as? [Int:Sheep]{
-            self.earlierYears = earlierYears
-        }
     }
     
     func isLamb() -> Bool {
@@ -86,10 +87,7 @@ class Sheep: NSObject {
 
         return true
     }
-    
-    
 
-    
     static let birthdayFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -128,42 +126,6 @@ extension Sheep {
             lhs.groupMemberships == rhs.groupMemberships &&
             lhs.weightings == rhs.weightings &&
             lhs.earlierYears == rhs.earlierYears)
-    }
-}
-
-extension Sheep: NSCoding {
-    struct Keys {
-        static let sheepID = "sheepID"
-        static let birthday = "birthday"
-        static let notes = "notes"
-        static let lambs = "lambs"
-        static let mother = "mother"
-        static let biologicalMother = "biologicalMother"
-        static let father = "father"
-        static let ram = "ram"
-        static let assumedNumberOfLambs = "assumedNumberOfLambs"
-        static let groupMemberships = "groupMemberships"
-        static let female = "female"
-        static let weightings = "weightings"
-        static let earlierYears = "earlierYears"
-    }
-    
-    
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(sheepID, forKey: Keys.sheepID)
-        aCoder.encode(birthday, forKey: Keys.birthday)
-        aCoder.encode(notes, forKey: Keys.notes)
-        aCoder.encode(lambs, forKey: Keys.lambs)
-        aCoder.encode(mother, forKey: Keys.mother)
-        aCoder.encode(biologicalMother, forKey: Keys.biologicalMother)
-        aCoder.encode(father, forKey: Keys.father)
-        aCoder.encode(ram, forKey: Keys.ram)
-        aCoder.encode(assumedNumberOfLambs, forKey: Keys.assumedNumberOfLambs)
-        aCoder.encode(groupMemberships, forKey: Keys.groupMemberships)
-        aCoder.encode(female, forKey: Keys.female)
-        aCoder.encode(weightings, forKey: Keys.weightings)
-        aCoder.encode(earlierYears, forKey: Keys.earlierYears)
     }
 }
 

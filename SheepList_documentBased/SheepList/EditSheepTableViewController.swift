@@ -138,7 +138,7 @@ class EditSheepTableViewController: UITableViewController {
         
         let groupsSortedByPopularity = modelC?.document?.sheepList?.groups.sorted(by: {$0.popularity > $1.popularity} )
         
-        guard let group1 = groupsSortedByPopularity?.first else {return [deleteAction]}
+        guard var group1 = groupsSortedByPopularity?.first else {return [deleteAction]}
         
         let editAction = UITableViewRowAction(style: .normal, title: group1.title) { (rowAction, indexPath) in
             
