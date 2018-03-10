@@ -93,7 +93,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                     editSheepTVC.sheepIndex = 0
                 }
                 editSheepTVC.seguedFrom = "sheepList"
-                sheepListController.tableView.reloadData()
+                sheepListController.reloadData()
                 editSheepTVC.tableView.reloadData()
                 
                 
@@ -117,6 +117,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         guard let settingsController = splitViewController3.viewControllers.first?.childViewControllers.first as? SettingsTVC else {return}
         
         settingsController.documentBrowserVC = self
+        settingsController.modelC = sheepListController.modelC
         
         present(documentVC, animated: true)
     }

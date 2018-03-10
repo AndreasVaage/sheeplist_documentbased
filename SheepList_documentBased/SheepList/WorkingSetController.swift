@@ -11,23 +11,28 @@ import UIKit
 
 class WorkingSetController: SheepTableVC {
     var modelC: ModelController!
-    var missingSheeps = [Sheep]()
-    var missingLambs = [Sheep]()
-    var lambs = [Sheep]()
+    var missingSheeps = Set<Sheep>()
+    var missingLambs = Set<Sheep>()
+    var shouldMatchSheepsAndLambs = false
     
     override func deleteSheep(at index: Int){
-        modelC.document?.sheepList?.workingSet.remove(at: index)
+        let sheep = displayedSheeps[index]
+        modelC.document?.sheepList?.workingSet.remove(sheep)
         sheeps = modelC.document?.sheepList?.workingSet ?? []
+        recalculateDisplayedData()
         modelC.dataChanged()
     }
     
     override func viewDidLoad() {
         sheeps = modelC.document?.sheepList?.workingSet ?? []
         groups = modelC.document?.sheepList?.groups ?? []
-        shouldDisplayLambs = false
-
-        
+        shouldDisplayLambsInsideSheepCell = false
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
     }
     
     @IBAction func moreButtonTapped(_ sender: UIBarButtonItem) {
@@ -41,18 +46,23 @@ class WorkingSetController: SheepTableVC {
         // Spesify where it will pop up when used on large screens
         chooseAction.popoverPresentationController?.barButtonItem = sender
         
-        chooseAction.addAction(UIAlertAction(
+        let matchSheepAndLambsAction = UIAlertAction(
             title: "Match Sheeps and Lambs",
             style: .default,
             handler: {action in
                 self.matchSheepsAndLambs()
-        }))
-        chooseAction.addAction(UIAlertAction(
+        })
+        let unMatchSheepAndLambsAction = UIAlertAction(
             title: "Unmatch Sheeps and Lambs",
             style: .default,
             handler: { action in
                 self.unMatchSheepsAndLambs()
-        }))
+        })
+        if shouldMatchSheepsAndLambs {
+            chooseAction.addAction(unMatchSheepAndLambsAction)
+        }else{
+            chooseAction.addAction(matchSheepAndLambsAction)
+        }
         chooseAction.addAction(UIAlertAction(
             title: "Cancel",
             style: .cancel
@@ -60,48 +70,44 @@ class WorkingSetController: SheepTableVC {
         present(chooseAction, animated: true)
     }
     
-    func matchSheepsAndLambs() {
+    func findMissingSheeps() {
         for sheep in sheeps{
-            if !sheep.isLamb(){
-                for lamb in sheep.lambs{
-                    if sheeps.contains(lamb), !lambs.contains(lamb){
-                        lambs.append(lamb)
-                    }else if !missingLambs.contains(lamb){
-                        missingLambs.append(lamb)
-                    }
-                }
+            if sheep.isLamb(), let mother = sheep.mother, !sheeps.contains(mother){
+                missingSheeps.insert(mother)
             }else{
-                if let mother = sheep.mother,
-                    !sheeps.contains(mother),
-                    !missingSheeps.contains(mother){
-                    missingSheeps.append(mother)
-                    if !lambs.contains(sheep){
-                        lambs.append(sheep)
+                for lamb in sheep.lambs{
+                    if !sheeps.contains(lamb){
+                        missingLambs.insert(lamb)
                     }
                 }
             }
         }
-        sheeps = sheeps.filter{!lambs.contains($0) && !missingLambs.contains($0)}
-        sheeps.append(contentsOf: missingSheeps)
-        
-        shouldDisplayLambs = true
+    }
+    
+    
+    func matchSheepsAndLambs() {
+        shouldMatchSheepsAndLambs = true
+        shouldDisplayLambsInsideSheepCell = true
         setLabelEdgeColor = {sheep in
             if self.missingLambs.contains(sheep) || self.missingSheeps.contains(sheep){
                 return .red
             }
             return nil
         }
-        tableView.reloadData()
+        findMissingSheeps()
+        sheeps.formUnion(missingSheeps)
+        reloadData()
+        
     }
     
     func unMatchSheepsAndLambs(){
-        lambs = []
+        shouldDisplayLambsInsideSheepCell = false
+        shouldMatchSheepsAndLambs = false
+        setLabelEdgeColor = nil
         missingLambs = []
         missingSheeps = []
         sheeps = modelC.document?.sheepList?.workingSet ?? []
-        shouldDisplayLambs = false
-        setLabelEdgeColor = nil
-        tableView.reloadData()
+        reloadData()
     }
     
     // MARK: - Navigation
@@ -111,13 +117,10 @@ class WorkingSetController: SheepTableVC {
                 as! EditSheepTableViewController
             let selectedRow = tableView.indexPathForSelectedRow!.row
             detailedSheepViewController.modelC = modelC
-            if searchController.isActive && searchController.searchBar.text != "" {
-                detailedSheepViewController.sheep = filteredSheeps[selectedRow].copy() as! Sheep
-                detailedSheepViewController.sheepReference = filteredSheeps[selectedRow]
-            }else{
-                detailedSheepViewController.sheep = sheeps[selectedRow].copy() as! Sheep
-                detailedSheepViewController.sheepReference = sheeps[selectedRow]
-            }
+            
+            detailedSheepViewController.sheep = displayedSheeps[selectedRow].copy() as! Sheep
+            detailedSheepViewController.sheepReference = displayedSheeps[selectedRow]
+            
             
             detailedSheepViewController.seguedFrom = "workingSet"
         }else if segue.identifier == "addSheep"{
@@ -135,6 +138,6 @@ class WorkingSetController: SheepTableVC {
         guard segue.identifier == "UnwindToWorkingSet" else { return }
         if let _ = tableView.indexPathForSelectedRow {
             //tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.automatic )
-        } 
+        }
     }
 }

@@ -13,20 +13,58 @@ class SheepTableVC: UITableViewController {
     // Used as a parentclass for displaying a list of sheeps. Only does the
     // visualization. Adding, deleting and editing must be done by the class
     // inheritating.
-    
-    var sheeps = [Sheep]()
+    enum Sortings {
+        case groups
+        case lambID
+        case sheepID
+    }
+    var sortedBy = Sortings.sheepID
+    var isFiltering = false
+    var sheeps = Set<Sheep>()
+    var lambs = Set<Sheep>()
     var groups = [Group]()
-    var filteredSheeps = [Sheep]()
-    var shouldDisplayLambs = true
+    var filteredSheeps = Set<Sheep>()
+    var shouldDisplayLambsInsideSheepCell = true
     var setLabelEdgeColor: ((Sheep) -> UIColor?)?
     var setLabelBackGroundColor: ((Sheep) -> UIColor?)?
     let searchController = UISearchController(searchResultsController: nil)
+    var displayedSheeps = [Sheep]()
+    
+    func reloadData(){
+        recalculateDisplayedData()
+        tableView.reloadData()
+    }
+    
+    func recalculateDisplayedData(){
+        
+        if isSearching == false{
+            if shouldDisplayLambsInsideSheepCell{
+                filteredSheeps = sheeps.filter({!$0.isLamb()})
+            }else{
+                filteredSheeps = sheeps
+            }
+        }
+        switch sortedBy {
+        case .groups:
+            displayedSheeps = filteredSheeps.sorted(by:{
+                guard let first = self.getHighestPriorityGroup(of: $0) else { return false}
+                guard let second = self.getHighestPriorityGroup(of: $1) else { return true}
+                return self.groups.first(where: {$0 == first || $0 == second}) == first
+            })
+        case .lambID:
+            displayedSheeps = filteredSheeps.sorted(by:{
+                guard let first = $0.lambs.first?.sheepID else { return false}
+                guard let second = $1.lambs.first?.sheepID else {return true}
+                return first < second
+            })
+        case .sheepID:
+            displayedSheeps = filteredSheeps.sorted(by: {$0.sheepID! < $1.sheepID!})
+        }
+    }
     
     func deleteSheep(at index: Int){
         fatalError("Must override deleteSheep function")
     }
-    
-    
     
     @IBAction func sortButtonPressed(_ sender: Any) {
         let chooseSortCrtiterium = UIAlertController(
@@ -42,30 +80,22 @@ class SheepTableVC: UITableViewController {
             title: "Groups",
             style: .default,
             handler: {action in
-                self.sheeps.sort(by:{
-                    guard let first = self.getHighestPriorityGroup(of: $0) else { return false}
-                    guard let second = self.getHighestPriorityGroup(of: $1) else { return true}
-                    return self.groups.first(where: {$0 == first || $0 == second}) == first
-                })
-                self.tableView.reloadData()
+                self.sortedBy = .groups
+                self.reloadData()
         }))
         chooseSortCrtiterium.addAction(UIAlertAction(
             title: "Lamb ID",
             style: .default,
             handler: { action in
-                self.sheeps.sort(by:{
-                    guard let first = $0.lambs.first?.sheepID else { return false}
-                    guard let second = $1.lambs.first?.sheepID else {return true}
-                    return first < second
-                })
-                self.tableView.reloadData()
+                self.sortedBy = .lambID
+                self.reloadData()
         }))
         chooseSortCrtiterium.addAction(UIAlertAction(
             title: "Sheep ID",
             style: .default,
             handler: { action in
-                self.sheeps.sort(by: {$0.sheepID! < $1.sheepID!})
-                self.tableView.reloadData()
+                self.sortedBy = .sheepID
+                self.reloadData()
         }))
         chooseSortCrtiterium.addAction(UIAlertAction(
             title: "Cancel",
@@ -95,12 +125,13 @@ class SheepTableVC: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
+    
+    var isSearching: Bool {
+        return searchController.isActive && searchController.searchBar.text != ""
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive && searchController.searchBar.text != "" {
-            return filteredSheeps.count
-        }
-        return sheeps.count
+        return displayedSheeps.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,16 +142,14 @@ class SheepTableVC: UITableViewController {
             fatalError("Arranged subviews count dont match subview count")
         }
         let sheep: Sheep
-        if searchController.isActive && searchController.searchBar.text != "" {
-            sheep = filteredSheeps[indexPath.row]
-        }else{
-            sheep = sheeps[indexPath.row]
-        }
+        
+        sheep = displayedSheeps[indexPath.row]
+        
         cell.SheepIDLabel?.text = sheep.sheepID
         cell.SheepIDLabel.textColor = getHighestPriorityGroup(of: sheep)?.color
         addCustomDisplayFeature(to: cell.SheepIDLabel, for: sheep)
         for (index,lamb) in sheep.lambs.enumerated() {
-            guard shouldDisplayLambs else {break}
+            guard shouldDisplayLambsInsideSheepCell else {break}
             
             if cell.LambStackView.subviews.count > index{
                 let label = cell.LambStackView.arrangedSubviews[index] as! PaddingLabel
@@ -137,7 +166,7 @@ class SheepTableVC: UITableViewController {
         }
         
         var desiredNumberOfSubviews = sheep.lambs.count
-        if !shouldDisplayLambs{
+        if !shouldDisplayLambsInsideSheepCell{
             desiredNumberOfSubviews = 0
         }
         if cell.LambStackView.subviews.count > desiredNumberOfSubviews {

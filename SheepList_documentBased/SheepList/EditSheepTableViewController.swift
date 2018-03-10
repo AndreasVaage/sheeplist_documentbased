@@ -47,9 +47,9 @@ class EditSheepTableViewController: UITableViewController {
     
     @IBAction func addLambButtonPressed(_ sender: UIButton) {
         let newIndexPath = IndexPath(row: sheep.lambs.count ,section: lambSection)
-        
-        sheep.lambs.append(Sheep(sheepID: suggestLambID(lastSugestion: nil), birthday: Date(), mother: sheep, father: sheep.ram))
-        sheep.lambs.last?.biologicalMother = sheep
+        let newLamb = Sheep(sheepID: suggestLambID(lastSugestion: nil), birthday: Date(), mother: sheep, father: sheep.ram)
+        newLamb.biologicalMother = sheep
+        sheep.lambs.append(newLamb)
         numberOfLambIdGuesses.append(0)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
         updateLambHeader()
@@ -172,8 +172,12 @@ class EditSheepTableViewController: UITableViewController {
         return [deleteAction,editAction,moreAcction]
     }
     
+    func somethingHasChanged() -> Bool{
+        return sheepReference != sheep
+    }
+    
     func updateSaveButtonState() {
-        if sheep.isCorrectFormat() && isEnteringID == false && sheepReference != sheep{
+        if somethingHasChanged() && sheep.isCorrectFormat() && isEnteringID == false{
             saveButton.isEnabled = true
         }else{
             saveButton.isEnabled = false
@@ -434,11 +438,17 @@ extension EditSheepTableViewController {
     @IBAction func saveUnwind(_ sender: UIBarButtonItem) {
         
         if sheepReference == nil {
-            guard modelC!.save(sheep: sheep, sheepIndex: sheepIndex, lambIndex: lambIndex) else{
+            guard modelC!.saveNew(sheep: sheep) else{
                 fatalError("Failed to save sheep")
+            }
+            for lamb in sheep.lambs{
+                guard modelC!.saveNew(sheep: lamb) else{
+                    fatalError("Failed to save sheep")
+                }
             }
         }else{
             sheepReference?.setValues(equal: sheep)
+            
         }
         updateModel()
         
@@ -680,7 +690,7 @@ extension EditSheepTableViewController: ChooseGroupsTVCDelegate {
     }
     
     func changedGroups(to newGroups: [Group], deleted deletedGroup: Group){
-        for sheep in modelC!.everyOneByThemSelf {
+        for sheep in modelC!.sheeps {
             if let indexPath = sheep.groupMemberships.index(of: deletedGroup){
                 sheep.groupMemberships.remove(at: indexPath)
             }

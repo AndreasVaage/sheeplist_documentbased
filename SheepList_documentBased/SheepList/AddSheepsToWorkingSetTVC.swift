@@ -12,17 +12,25 @@ class AddSheepsToWorkingSetTVC: SheepTableVC {
     var modelC: ModelController!
     
     override func viewDidLoad() {
-        sheeps = modelC.everyOneByThemSelf
+        sheeps = modelC.sheeps
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = .none
+        shouldDisplayLambsInsideSheepCell = false
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        modelC.document?.sheepList?.workingSet.append(sheeps[indexPath.row])
+        let sheep = displayedSheeps[indexPath.row]
+        modelC.document?.sheepList?.workingSet.insert(sheep)
         modelC.dataChanged()
     }
+    
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        modelC.document?.sheepList?.workingSet.remove(at: modelC.workingSet.index(of: sheeps[indexPath.row])!)
+        let deselectedSheep = displayedSheeps[indexPath.row]
+        modelC.document?.sheepList?.workingSet.remove(deselectedSheep)
         modelC.dataChanged()
     }
     
@@ -30,19 +38,15 @@ class AddSheepsToWorkingSetTVC: SheepTableVC {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SingleSheepCell") as? SingleSheepCell else {
             fatalError("Could not dequeue a cell")
         }
-        let sheep: Sheep
-        if searchController.isActive && searchController.searchBar.text != "" {
-            sheep = filteredSheeps[indexPath.row]
-        }else{
-            sheep = sheeps[indexPath.row]
-        }
+        let sheep = displayedSheeps[indexPath.row]
+        
         cell.textLabel?.text = sheep.sheepID
         //cell.textLabel?.textColor = sheep.activeGroupMemberships().first?.color
         
         return cell
     }
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.setSelected(modelC.workingSet.contains(sheeps[indexPath.row]), animated: false)
+        cell.setSelected(modelC.workingSet.contains(displayedSheeps[indexPath.row]), animated: false)
     }
     
 }

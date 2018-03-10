@@ -9,9 +9,17 @@
 import UIKit
 
 class SheepList: Codable{
+    enum CodingKeys: String, CodingKey
+    {
+        case sheeps
+        //case workingSet
+        case _workingSet
+        case groups
+    }
     var year = 2018
-    var sheeps = [Sheep]()
-    var workingSet = [Sheep]()
+    var sheeps = Set<Sheep>()
+    var workingSet = Set<Sheep>()
+    var _workingSet = Set<String>()
     var groups = [
         Group("orphan",.blue),Group("dead",.red),
         Group("missing",.gray),Group("sold",.green),

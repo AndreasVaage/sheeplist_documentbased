@@ -11,16 +11,16 @@ import UIKit
 
 class ModelController{
     var document: SheepDocument?
-    var sheeps: [Sheep] {return document?.sheepList?.sheeps ?? []}
-    var workingSet: [Sheep] {return document?.sheepList?.workingSet ?? []}
+    var sheeps: Set<Sheep> {return (document?.sheepList?.sheeps) ?? []}
+    var workingSet: Set<Sheep> {return (document?.sheepList?.workingSet)!}
     
-    var everyOneByThemSelf: [Sheep] {
-        var sheepList: [Sheep]  = sheeps
-        for sheep in sheeps {
-            sheepList.append(contentsOf: sheep.lambs)
-        }
-        return sheepList
-    }
+//    var everyOneByThemSelf: [Sheep] {
+//        var sheepList: [Sheep]  = sheeps
+//        for sheep in sheeps {
+//            sheepList.append(contentsOf: sheep.lambs)
+//        }
+//        return sheepList
+//    }
     
 //    func findMissingSheeps() -> [Sheep]{
 //        var missingSheeps = [Sheep]()
@@ -80,32 +80,20 @@ class ModelController{
 //    }
     
     func delete(sheep: Sheep) {
-        if let index = sheeps.index(of: sheep){
-            document?.sheepList?.sheeps.remove(at: index)
+        if document?.sheepList?.sheeps.remove(sheep) != nil{
             dataChanged()
         }else{
             fatalError("Trying to delete sheep which does not exist")
         }
     }
     
-    func save(sheep: Sheep, sheepIndex: Int?, lambIndex: Int?) -> Bool{
+    func saveNew(sheep: Sheep) -> Bool{
         if document?.sheepList == nil {
             document?.sheepList = SheepList()
             print("\nCreated new Sheeplist")
         }
         guard document?.sheepList?.sheeps != nil else {return false}
-        
-        if let _ = sheepIndex {
-            fatalError("Deprecated functionality")
-            //if let lambIndex = lambIndex {
-            //    document?.sheepList?.sheeps?[sheepIndex].lambs[lambIndex] = sheep
-            //}else{
-            //    document?.sheepList?.sheeps?[sheepIndex] = sheep
-            //}
-            
-        }else{
-            document?.sheepList?.sheeps.append(sheep)
-        }
+        document?.sheepList?.sheeps.insert(sheep)
         dataChanged()
         return true
     }

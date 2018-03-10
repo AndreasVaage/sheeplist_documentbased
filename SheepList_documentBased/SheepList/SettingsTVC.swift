@@ -11,6 +11,7 @@ import UIKit
 class SettingsTVC: UITableViewController {
     var documentBrowserVC: DocumentBrowserViewController?
     var setting: String?
+    var modelC: ModelController?
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings"

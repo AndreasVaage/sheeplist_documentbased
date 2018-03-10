@@ -12,16 +12,18 @@ class SheepDocument: UIDocument {
     var sheepList: SheepList?
     
     override func contents(forType typeName: String) throws -> Any {
-        for sheep in sheepList?.sheeps ?? [] {
-            sheep._biologicalMother = sheep.biologicalMother?.sheepID
-            sheep._father = sheep.father?.father?.sheepID
-            sheep._ram = sheep.ram?.sheepID
-            for lamb in sheep.lambs{
-                lamb._biologicalMother = lamb.biologicalMother?.sheepID
-                lamb._father = lamb.father?.father?.sheepID
-                lamb._ram = lamb.ram?.sheepID
-            }
-        }
+        
+        sheepList?.sheeps.forEach({sheep in
+            sheep._biologicalMotherID = sheep.biologicalMother?.sheepID
+            sheep._fatherID = sheep.father?.father?.sheepID
+            sheep._ramID = sheep.ram?.sheepID
+            sheep._motherID = sheep.mother?.sheepID
+            sheep._lambIDs = sheep.lambs.map{$0.sheepID!}
+        })
+        sheepList?.workingSet.forEach({sheep in
+            self.sheepList?._workingSet.insert(sheep.sheepID!)
+        })
+        
         do {
             return try JSONEncoder().encode(sheepList)
         } catch  {
@@ -36,14 +38,18 @@ class SheepDocument: UIDocument {
         if let data = contents as? Data {
             sheepList = try? JSONDecoder().decode(SheepList.self, from: data)
             
-            for sheep in sheepList?.sheeps ?? [] {
-                sheep.biologicalMother = 
-                sheep.father =
-                sheep.ram = 
-                for lamb in sheep.lambs{
-                    lamb.mother = sheep
-                }
-            }
+            sheepList?.sheeps.forEach({sheep in
+                sheep.biologicalMother = self.sheepList?.sheeps.first(where: {$0.sheepID == sheep._biologicalMotherID})
+                sheep.father = self.sheepList?.sheeps.first(where: {$0.sheepID == sheep._fatherID})
+                sheep.ram = self.sheepList?.sheeps.first(where: {$0.sheepID == sheep._ramID})
+                sheep.mother = self.sheepList?.sheeps.first(where: {$0.sheepID == sheep._motherID})
+                sheep.lambs = (self.sheepList?.sheeps.filter({sheep._lambIDs.contains($0.sheepID!)}))!
+            })
+            
+            sheepList?._workingSet.forEach({sheepID in
+                self.sheepList?.workingSet.insert((self.sheepList?.sheeps.first(where: {$0.sheepID! == sheepID}))!)
+            })
+            
         }
     }
 }

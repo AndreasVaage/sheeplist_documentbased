@@ -8,35 +8,41 @@
 
 import UIKit
 
-class Sheep: Equatable, Codable{
+class Sheep: Equatable, Codable, Hashable{
+    var hashValue: Int {
+        return Int(sheepID!)!
+    }
+    
     
     enum CodingKeys: String, CodingKey
     {
         case sheepID
         case birthday
         case notes
-        case lambs
-        //case mother
-        //case biologicalMother
-        case father
-        case ram
         case assumedNumberOfLambs
         case groupMemberships
         case female
         case weightings
-        case _biologicalMother
-        case _father
-        case _ram
+        //case lambs
+        //case mother
+        //case biologicalMother
+        //case father
+        //case ram
+        case _biologicalMotherID
+        case _fatherID
+        case _ramID
+        case _motherID
+        case _lambIDs
     }
     
     var sheepID: String?
     var birthday: Date?
     var notes: String?
-    var lambs: [Sheep]
+    var lambs = [Sheep]()
     var mother: Sheep? = nil
     var biologicalMother: Sheep? = nil
-    var father: Sheep?
-    var ram: Sheep?
+    var father: Sheep? = nil
+    var ram: Sheep? = nil
     var assumedNumberOfLambs = 0
     var groupMemberships: [Group]
     var female = true
@@ -47,9 +53,11 @@ class Sheep: Equatable, Codable{
     let lambPrefix = "70"
     
     // internal variables to store references in a JSON
-    var _biologicalMother: String?
-    var _father: String?
-    var _ram: String?
+    var _biologicalMotherID: String?
+    var _fatherID: String?
+    var _ramID: String?
+    var _motherID: String?
+    var _lambIDs = [String]()
     
     
     init(sheepID: String?) {
@@ -113,20 +121,19 @@ struct Weigthing: Codable, Equatable{
 
 extension Sheep {
     static func ==(lhs: Sheep, rhs: Sheep) -> Bool {
-        return (lhs.sheepID == rhs.sheepID &&
-            lhs.birthday == rhs.birthday &&
-            lhs.mother == rhs.mother &&
-            lhs.father == rhs.father &&
-            lhs.notes == rhs.notes &&
-            lhs.lambs.elementsEqual(rhs.lambs, by: {$0 == $1}) &&
-            lhs.biologicalMother == rhs.biologicalMother &&
-            lhs.female == rhs.female &&
-            lhs.assumedNumberOfLambs == rhs.assumedNumberOfLambs &&
-            lhs.ram == rhs.ram &&
-            lhs.groupMemberships == rhs.groupMemberships &&
-            lhs.weightings == rhs.weightings &&
-            lhs.earlierYears == rhs.earlierYears)
-    }
+        return (lhs.sheepID == rhs.sheepID //&&
+//            lhs.birthday == rhs.birthday &&
+//            lhs.mother == rhs.mother &&
+//            lhs.father == rhs.father &&
+//            lhs.notes == rhs.notes &&
+//            lhs.lambs.elementsEqual(rhs.lambs, by: {$0 == $1}) &&
+//            lhs.biologicalMother == rhs.biologicalMother &&
+//            lhs.female == rhs.female &&
+//            lhs.assumedNumberOfLambs == rhs.assumedNumberOfLambs &&
+//            lhs.ram == rhs.ram &&
+//            lhs.groupMemberships == rhs.groupMemberships &&
+//            lhs.weightings == rhs.weightings
+        ) }
 }
 
 extension Sheep: NSCopying {
@@ -140,7 +147,6 @@ extension Sheep: NSCopying {
         copy.ram = ram
         copy.groupMemberships = groupMemberships
         copy.weightings = weightings
-        copy.earlierYears = earlierYears
         return copy
     }
     
@@ -157,7 +163,6 @@ extension Sheep: NSCopying {
         ram = sheep.ram
         groupMemberships = sheep.groupMemberships
         weightings = sheep.weightings
-        earlierYears = sheep.earlierYears
     }
 }
 

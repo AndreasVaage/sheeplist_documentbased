@@ -12,22 +12,23 @@ class SheepListController: SheepTableVC {
     var modelC: ModelController!
     
     override func deleteSheep(at index: Int){
-        modelC.delete(sheep: sheeps[index])
+        modelC.delete(sheep: displayedSheeps[index])
         sheeps = modelC.sheeps
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     func updateViewFromModel() {
         sheeps = modelC.document?.sheepList?.sheeps ?? []
         groups = modelC.document?.sheepList?.groups ?? []
-        tableView.reloadData()
+        reloadData()
     }
 }
 
@@ -39,13 +40,11 @@ extension SheepListController {
         if segue.identifier == "showDetails", let editSheepTVC = segue.destination.childViewControllers.first
             as? EditSheepTableViewController {
             editSheepTVC.modelC = modelC
-            if searchController.isActive && searchController.searchBar.text != "" {
-                editSheepTVC.sheep = filteredSheeps[tableView.indexPathForSelectedRow!.row].copy() as! Sheep
-                editSheepTVC.sheepReference = filteredSheeps[tableView.indexPathForSelectedRow!.row]
-            }else{
-                editSheepTVC.sheep = sheeps[tableView.indexPathForSelectedRow!.row].copy() as! Sheep
-                editSheepTVC.sheepReference = sheeps[tableView.indexPathForSelectedRow!.row]
-            }
+            
+            editSheepTVC.sheep = displayedSheeps[tableView.indexPathForSelectedRow!.row].copy() as! Sheep
+            editSheepTVC.sheepReference = displayedSheeps[tableView.indexPathForSelectedRow!.row]
+            
+            
            // modelC.selectedSheep = indexPath.row
             
             editSheepTVC.seguedFrom = "sheepList"
