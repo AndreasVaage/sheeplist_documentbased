@@ -21,10 +21,10 @@ class SheepTableVC: UITableViewController {
     }
     var sortedBy = Sortings.sheepID
     var isFiltering = false
-    var sheeps = Set<Sheep>()
-    var lambs = Set<Sheep>()
+    var sheeps = [String:Sheep]()
+    var lambs = [String:Sheep]()
     var groups = [Group]()
-    var filteredSheeps = Set<Sheep>()
+    var filteredSheeps = [String:Sheep]()
     var shouldDisplayLambsInsideSheepCell = true
     var setLabelEdgeColor: ((Sheep) -> UIColor?)?
     var setLabelBackGroundColor: ((Sheep) -> UIColor?)?
@@ -41,7 +41,7 @@ class SheepTableVC: UITableViewController {
         
         if isSearching == false{
             if shouldDisplayLambsInsideSheepCell{
-                filteredSheeps = sheeps.filter({!$0.isLamb()})
+                filteredSheeps = sheeps.filter({!$0.value.isLamb()})
             }else{
                 filteredSheeps = sheeps
             }
@@ -49,20 +49,20 @@ class SheepTableVC: UITableViewController {
         switch sortedBy {
         case .groups:
             displayedSheeps = filteredSheeps.sorted(by:{
-                guard let first = self.getHighestPriorityGroup(of: $0) else { return false}
-                guard let second = self.getHighestPriorityGroup(of: $1) else { return true}
+                guard let first = self.getHighestPriorityGroup(of: $0.value) else { return false}
+                guard let second = self.getHighestPriorityGroup(of: $1.value) else { return true}
                 return self.groups.first(where: {$0 == first || $0 == second}) == first
-            })
+            }).map({$0.value})
         case .lambID:
             displayedSheeps = filteredSheeps.sorted(by:{
-                guard let first = $0.lambs.first?.sheepID else { return false}
-                guard let second = $1.lambs.first?.sheepID else {return true}
+                guard let first = $0.value.lambs.first?.sheepID else { return false}
+                guard let second = $1.value.lambs.first?.sheepID else {return true}
                 return first < second
-            })
+            }).map({$0.value})
         case .sheepID:
-            displayedSheeps = filteredSheeps.sorted(by: {$0.sheepID! < $1.sheepID!})
+            displayedSheeps = filteredSheeps.sorted(by: {$0.value.sheepID! < $1.value.sheepID!}).map({$0.value})
         case .custom:
-            displayedSheeps = filteredSheeps.sorted(by: customSortCriterium!)
+            displayedSheeps = filteredSheeps.sorted(by: {customSortCriterium!($0.value,$1.value)}).map({$0.value})
         }
     }
     
@@ -236,7 +236,7 @@ extension SheepTableVC: UISearchResultsUpdating{
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
     func filterContentForSearchText(searchText: String, scope: String = "All"){
-        filteredSheeps = sheeps.filter { sheep in
+        filteredSheeps = sheeps.filter { (key,sheep) in
             for lamb in sheep.lambs {
                 if subSecuence(is: searchText.lowercased(), subSecuenceOff: lamb.sheepID!.lowercased()){
                     return true

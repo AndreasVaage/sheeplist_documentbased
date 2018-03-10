@@ -24,13 +24,13 @@ class AddSheepsToWorkingSetTVC: SheepTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sheep = displayedSheeps[indexPath.row]
-        modelC.document?.sheepList?.workingSet.insert(sheep)
+        modelC.document?.sheepList?.workingSet[sheep.sheepID!] = sheep
         modelC.dataChanged()
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let deselectedSheep = displayedSheeps[indexPath.row]
-        modelC.document?.sheepList?.workingSet.remove(deselectedSheep)
+        modelC.document?.sheepList?.workingSet.removeValue(forKey: deselectedSheep.sheepID!)
         modelC.dataChanged()
     }
     
@@ -46,7 +46,7 @@ class AddSheepsToWorkingSetTVC: SheepTableVC {
         return cell
     }
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.setSelected(modelC.workingSet.contains(displayedSheeps[indexPath.row]), animated: false)
+        cell.setSelected(modelC.workingSet.keys.contains(displayedSheeps[indexPath.row].sheepID!), animated: false)
     }
     
 }

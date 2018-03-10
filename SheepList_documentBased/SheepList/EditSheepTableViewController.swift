@@ -74,7 +74,7 @@ class EditSheepTableViewController: UITableViewController {
             sheepID = sheep.lambPrefix + "000"
         }
         
-        while (modelC?.document?.sheepList?.allSheepAndLambIDs ?? []).contains(sheepID!) {
+        while (modelC?.document?.sheepList?.sheeps.keys)?.contains(sheepID!) ?? false {
             sheepID = String(describing: Int(sheepID!)!+1)
         }
         return sheepID
@@ -629,7 +629,7 @@ extension EditSheepTableViewController: UITextFieldDelegate {
                 presentSheepIDDoesnExistAllert(sheepID: enteredText)
                 return false
             }
-            let enteredSheep = modelC?.document?.sheepList?.sheeps.first(where: {$0.sheepID == enteredText})
+            let enteredSheep = modelC?.document?.sheepList?.sheeps[enteredText]
             switch indexPath.row {
             case 0:
                 sheep.mother = enteredSheep
@@ -691,7 +691,7 @@ extension EditSheepTableViewController: ChooseGroupsTVCDelegate {
     }
     
     func changedGroups(to newGroups: [Group], deleted deletedGroup: Group){
-        for sheep in modelC!.sheeps {
+        for sheep in modelC!.sheeps.values {
             if let indexPath = sheep.groupMemberships.index(of: deletedGroup){
                 sheep.groupMemberships.remove(at: indexPath)
             }

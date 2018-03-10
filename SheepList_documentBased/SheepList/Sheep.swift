@@ -9,11 +9,7 @@
 import UIKit
 
 class Sheep: Equatable, Codable{
-    var hashValue: Int {
-        return Int(sheepID!)!
-    }
-    
-    
+
     enum CodingKeys: String, CodingKey
     {
         case sheepID

@@ -85,10 +85,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         
         sheepListController.modelC.document?.open { success in
             if success {
-                sheepListController.sheeps = sheepListController.modelC.document?.sheepList?.sheeps ?? []
+                sheepListController.sheeps = sheepListController.modelC.document?.sheepList?.sheeps ?? [:]
                 sheepListController.groups = sheepListController.modelC.document?.sheepList?.groups ?? []
                 editSheepTVC.modelC = sheepListController.modelC
-                if let sheep = sheepListController.sheeps.first {
+                if let sheep = sheepListController.sheeps.values.first {
                     editSheepTVC.sheep = sheep
                     editSheepTVC.sheepIndex = 0
                 }

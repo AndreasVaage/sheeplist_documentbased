@@ -17,25 +17,15 @@ class SheepList: Codable{
         case groups
     }
     var year = 2018
-    var sheeps = Set<Sheep>()
-    var workingSet = Set<Sheep>()
+    var sheeps = [String:Sheep]()
+    var workingSet = [String:Sheep]()
     var _workingSet = Set<String>()
     var groups = [
         Group("orphan",.blue),Group("dead",.red),
         Group("missing",.gray),Group("sold",.green),
         Group("k",.yellow),Group("test",.purple),
         Group("testing",.orange),Group("tes",.cyan)]
-    
-    var allSheepAndLambIDs: [String] {
-        var allIDs = [String]()
-        for sheep in sheeps {
-            allIDs.append(sheep.sheepID!)
-            for lamb in sheep.lambs{
-                allIDs.append(lamb.sheepID!)
-            }
-        }
-        return allIDs
-    }
+
     
     func getMostImportentGroupColor(for sheep: Sheep) -> UIColor?{
         if sheep.groupMemberships == []{

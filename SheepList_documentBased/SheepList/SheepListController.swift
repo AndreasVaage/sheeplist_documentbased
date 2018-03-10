@@ -27,7 +27,7 @@ class SheepListController: SheepTableVC {
     }
     
     func updateViewFromModel() {
-        sheeps = modelC.document?.sheepList?.sheeps ?? []
+        sheeps = modelC.document?.sheepList?.sheeps ?? [:]
         groups = modelC.document?.sheepList?.groups ?? []
         reloadData()
     }

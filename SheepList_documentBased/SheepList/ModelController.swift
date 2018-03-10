@@ -11,8 +11,8 @@ import UIKit
 
 class ModelController{
     var document: SheepDocument?
-    var sheeps: Set<Sheep> {return (document?.sheepList?.sheeps) ?? []}
-    var workingSet: Set<Sheep> {return (document?.sheepList?.workingSet)!}
+    var sheeps: [String:Sheep] {return (document?.sheepList?.sheeps) ?? [:]}
+    var workingSet: [String:Sheep] {return (document?.sheepList?.workingSet)!}
     
 //    var everyOneByThemSelf: [Sheep] {
 //        var sheepList: [Sheep]  = sheeps
@@ -34,23 +34,16 @@ class ModelController{
 //        return missingSheeps
 //    }
     func sheepIdIsUnique(_ ID: String?) -> Bool{
-        return !(document?.sheepList?.allSheepAndLambIDs ?? []).contains(ID ?? "")
+        if let sheeps = document?.sheepList?.sheeps, let ID = ID{
+            return !sheeps.keys.contains(ID)
+        }else{
+            return ID != nil
+        }
     }
     
-    func findMissingLambs(list: [Sheep]) -> [Sheep] {
-        var missingLambs = [Sheep]()
-        for sheep in list{
-            for lamb in sheep.lambs{
-                if !workingSet.contains(lamb){
-                    missingLambs.append(lamb)
-                }
-            }
-        }
-        return missingLambs
-    }
     func countLambsInWorkingSet() -> Int{
         var count = 0
-        for sheep in workingSet{
+        for sheep in workingSet.values{
             if sheep.isLamb(){
                 count += 1
             }
@@ -80,7 +73,7 @@ class ModelController{
 //    }
     
     func delete(sheep: Sheep) {
-        if document?.sheepList?.sheeps.remove(sheep) != nil{
+        if document?.sheepList?.sheeps.removeValue(forKey: sheep.sheepID!) != nil{
             dataChanged()
         }else{
             fatalError("Trying to delete sheep which does not exist")
@@ -93,7 +86,7 @@ class ModelController{
             print("\nCreated new Sheeplist")
         }
         guard document?.sheepList?.sheeps != nil else {return false}
-        document?.sheepList?.sheeps.insert(sheep)
+        document?.sheepList?.sheeps[sheep.sheepID!] = sheep
         dataChanged()
         return true
     }
@@ -107,7 +100,7 @@ class ModelController{
     }
     
     func findLastSavedLambID() -> String? {
-        for sheep in sheeps.reversed(){
+        for sheep in sheeps.values.reversed(){
             if let lambID = sheep.lambs.last?.sheepID {
                 return lambID
             }

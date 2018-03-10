@@ -11,20 +11,20 @@ import UIKit
 
 class WorkingSetController: SheepTableVC {
     var modelC: ModelController!
-    var missingSheeps = Set<Sheep>()
-    var missingLambs = Set<Sheep>()
+    var missingSheeps = [String:Sheep]()
+    var missingLambs = [String:Sheep]()
     var shouldMatchSheepsAndLambs = false
     
     override func deleteSheep(at index: Int){
         let sheep = displayedSheeps[index]
-        modelC.document?.sheepList?.workingSet.remove(sheep)
-        sheeps = modelC.document?.sheepList?.workingSet ?? []
+        modelC.document?.sheepList?.workingSet.removeValue(forKey: sheep.sheepID!)
+        sheeps = modelC.document?.sheepList?.workingSet ?? [:]
         recalculateDisplayedData()
         modelC.dataChanged()
     }
     
     override func viewDidLoad() {
-        sheeps = modelC.document?.sheepList?.workingSet ?? []
+        sheeps = modelC.document?.sheepList?.workingSet ?? [:]
         groups = modelC.document?.sheepList?.groups ?? []
         shouldDisplayLambsInsideSheepCell = false
         super.viewDidLoad()
@@ -71,13 +71,13 @@ class WorkingSetController: SheepTableVC {
     }
     
     func findMissingSheeps() {
-        for sheep in sheeps{
-            if sheep.isLamb(), let mother = sheep.mother, !sheeps.contains(mother){
-                missingSheeps.insert(mother)
+        for sheep in sheeps.values{
+            if sheep.isLamb(), let mother = sheep.mother, !sheeps.values.contains(mother){
+                missingSheeps[mother.sheepID!] = mother
             }else{
                 for lamb in sheep.lambs{
-                    if !sheeps.contains(lamb){
-                        missingLambs.insert(lamb)
+                    if !sheeps.values.contains(lamb){
+                        missingLambs[lamb.sheepID!] = lamb
                     }
                 }
             }
@@ -88,18 +88,20 @@ class WorkingSetController: SheepTableVC {
         shouldMatchSheepsAndLambs = true
         shouldDisplayLambsInsideSheepCell = true
         setLabelEdgeColor = {sheep in
-            if self.missingLambs.contains(sheep) || self.missingSheeps.contains(sheep){
+            if self.missingLambs.keys.contains(sheep.sheepID!) || self.missingSheeps.keys.contains(sheep.sheepID!){
                 return .red
             }
             return nil
         }
         findMissingSheeps()
-        sheeps.formUnion(missingSheeps)
+        sheeps.merge(missingSheeps) { (sheep, _) -> Sheep in
+            return sheep
+        }
         customSortCriterium = {(lhs:Sheep,rhs:Sheep)-> Bool in
-            if self.missingSheeps.contains(lhs){ return true }
-            if self.missingSheeps.contains(rhs){ return false}
+            if self.missingSheeps.keys.contains(lhs.sheepID!){ return true }
+            if self.missingSheeps.keys.contains(rhs.sheepID!){ return false}
             for lamb in lhs.lambs {
-                if self.missingLambs.contains(lamb) {return true}
+                if self.missingLambs.keys.contains(lamb.sheepID!) {return true}
             }
             return false
         }
@@ -111,9 +113,9 @@ class WorkingSetController: SheepTableVC {
         shouldDisplayLambsInsideSheepCell = false
         shouldMatchSheepsAndLambs = false
         setLabelEdgeColor = nil
-        missingLambs = []
-        missingSheeps = []
-        sheeps = modelC.document?.sheepList?.workingSet ?? []
+        missingLambs = [:]
+        missingSheeps = [:]
+        sheeps = modelC.document?.sheepList?.workingSet ?? [:]
         sortedBy = .sheepID
         reloadData()
     }
