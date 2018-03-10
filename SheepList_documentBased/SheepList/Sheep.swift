@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Sheep: Equatable, Codable, Hashable{
+class Sheep: Equatable, Codable{
     var hashValue: Int {
         return Int(sheepID!)!
     }
@@ -39,10 +39,10 @@ class Sheep: Equatable, Codable, Hashable{
     var birthday: Date?
     var notes: String?
     var lambs = [Sheep]()
-    var mother: Sheep? = nil
-    var biologicalMother: Sheep? = nil
-    var father: Sheep? = nil
-    var ram: Sheep? = nil
+    weak var mother: Sheep? = nil
+    weak var biologicalMother: Sheep? = nil
+    weak var father: Sheep? = nil
+    weak var ram: Sheep? = nil
     var assumedNumberOfLambs = 0
     var groupMemberships: [Group]
     var female = true
@@ -121,18 +121,18 @@ struct Weigthing: Codable, Equatable{
 
 extension Sheep {
     static func ==(lhs: Sheep, rhs: Sheep) -> Bool {
-        return (lhs.sheepID == rhs.sheepID //&&
-//            lhs.birthday == rhs.birthday &&
-//            lhs.mother == rhs.mother &&
-//            lhs.father == rhs.father &&
-//            lhs.notes == rhs.notes &&
-//            lhs.lambs.elementsEqual(rhs.lambs, by: {$0 == $1}) &&
-//            lhs.biologicalMother == rhs.biologicalMother &&
-//            lhs.female == rhs.female &&
-//            lhs.assumedNumberOfLambs == rhs.assumedNumberOfLambs &&
-//            lhs.ram == rhs.ram &&
-//            lhs.groupMemberships == rhs.groupMemberships &&
-//            lhs.weightings == rhs.weightings
+        return (lhs.sheepID == rhs.sheepID &&
+            lhs.birthday == rhs.birthday &&
+            lhs.mother?.sheepID == rhs.mother?.sheepID &&
+            lhs.father?.sheepID == rhs.father?.sheepID &&
+            lhs.notes == rhs.notes &&
+            lhs.lambs.elementsEqual(rhs.lambs, by: {$0 == $1}) &&
+            lhs.biologicalMother?.sheepID == rhs.biologicalMother?.sheepID &&
+            lhs.female == rhs.female &&
+            lhs.assumedNumberOfLambs == rhs.assumedNumberOfLambs &&
+            lhs.ram?.sheepID == rhs.ram?.sheepID &&
+            lhs.groupMemberships == rhs.groupMemberships &&
+            lhs.weightings == rhs.weightings
         ) }
 }
 

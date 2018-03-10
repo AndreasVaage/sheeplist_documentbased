@@ -15,7 +15,7 @@ class SheepDocument: UIDocument {
         
         sheepList?.sheeps.forEach({sheep in
             sheep._biologicalMotherID = sheep.biologicalMother?.sheepID
-            sheep._fatherID = sheep.father?.father?.sheepID
+            sheep._fatherID = sheep.father?.sheepID
             sheep._ramID = sheep.ram?.sheepID
             sheep._motherID = sheep.mother?.sheepID
             sheep._lambIDs = sheep.lambs.map{$0.sheepID!}

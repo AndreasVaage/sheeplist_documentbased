@@ -14,6 +14,7 @@ class SheepListController: SheepTableVC {
     override func deleteSheep(at index: Int){
         modelC.delete(sheep: displayedSheeps[index])
         sheeps = modelC.sheeps
+        recalculateDisplayedData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

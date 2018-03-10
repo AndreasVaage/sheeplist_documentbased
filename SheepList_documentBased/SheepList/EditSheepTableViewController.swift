@@ -629,16 +629,17 @@ extension EditSheepTableViewController: UITextFieldDelegate {
                 presentSheepIDDoesnExistAllert(sheepID: enteredText)
                 return false
             }
+            let enteredSheep = modelC?.document?.sheepList?.sheeps.first(where: {$0.sheepID == enteredText})
             switch indexPath.row {
             case 0:
-                sheep.mother?.sheepID = enteredText
+                sheep.mother = enteredSheep
             case 1:
                 
-                sheep.biologicalMother?.sheepID = enteredText
+                sheep.biologicalMother = enteredSheep
             case 2:
-                sheep.father?.sheepID = enteredText
+                sheep.father = enteredSheep
             case 3:
-                sheep.ram?.sheepID = enteredText
+                sheep.ram = enteredSheep
             default:
                 fatalError("Not correct amount of family members")
             }

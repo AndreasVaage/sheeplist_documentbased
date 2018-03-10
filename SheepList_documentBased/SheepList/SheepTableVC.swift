@@ -17,6 +17,7 @@ class SheepTableVC: UITableViewController {
         case groups
         case lambID
         case sheepID
+        case custom
     }
     var sortedBy = Sortings.sheepID
     var isFiltering = false
@@ -27,6 +28,7 @@ class SheepTableVC: UITableViewController {
     var shouldDisplayLambsInsideSheepCell = true
     var setLabelEdgeColor: ((Sheep) -> UIColor?)?
     var setLabelBackGroundColor: ((Sheep) -> UIColor?)?
+    var customSortCriterium: ((Sheep,Sheep) -> Bool)?
     let searchController = UISearchController(searchResultsController: nil)
     var displayedSheeps = [Sheep]()
     
@@ -59,6 +61,8 @@ class SheepTableVC: UITableViewController {
             })
         case .sheepID:
             displayedSheeps = filteredSheeps.sorted(by: {$0.sheepID! < $1.sheepID!})
+        case .custom:
+            displayedSheeps = filteredSheeps.sorted(by: customSortCriterium!)
         }
     }
     

@@ -84,7 +84,6 @@ class WorkingSetController: SheepTableVC {
         }
     }
     
-    
     func matchSheepsAndLambs() {
         shouldMatchSheepsAndLambs = true
         shouldDisplayLambsInsideSheepCell = true
@@ -96,8 +95,16 @@ class WorkingSetController: SheepTableVC {
         }
         findMissingSheeps()
         sheeps.formUnion(missingSheeps)
+        customSortCriterium = {(lhs:Sheep,rhs:Sheep)-> Bool in
+            if self.missingSheeps.contains(lhs){ return true }
+            if self.missingSheeps.contains(rhs){ return false}
+            for lamb in lhs.lambs {
+                if self.missingLambs.contains(lamb) {return true}
+            }
+            return false
+        }
+        sortedBy = .custom
         reloadData()
-        
     }
     
     func unMatchSheepsAndLambs(){
@@ -107,6 +114,7 @@ class WorkingSetController: SheepTableVC {
         missingLambs = []
         missingSheeps = []
         sheeps = modelC.document?.sheepList?.workingSet ?? []
+        sortedBy = .sheepID
         reloadData()
     }
     
