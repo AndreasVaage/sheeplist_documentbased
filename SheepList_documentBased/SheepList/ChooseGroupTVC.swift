@@ -182,8 +182,8 @@ extension ChooseGroupTVC: EditGroupTVCDelegate {
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
             creatingNewGroup = false
         }else{
-            //let indexPath = tableView.indexPathForSelectedRow!
-            //groups[indexPath.row] = newGroup
+            let indexPath = tableView.indexPathForSelectedRow!
+            groups[indexPath.row] = newGroup
             print(groups.map{$0.title})
             delegate?.changedGroups(to: groups)
         }

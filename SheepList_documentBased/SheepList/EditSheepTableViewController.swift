@@ -138,7 +138,7 @@ class EditSheepTableViewController: UITableViewController {
         
         let groupsSortedByPopularity = modelC?.document?.sheepList?.groups.sorted(by: {$0.popularity > $1.popularity} )
         
-        guard var group1 = groupsSortedByPopularity?.first else {return [deleteAction]}
+        guard let group1 = groupsSortedByPopularity?.first else {return [deleteAction]}
         
         let editAction = UITableViewRowAction(style: .normal, title: group1.title) { (rowAction, indexPath) in
             
@@ -696,8 +696,12 @@ extension EditSheepTableViewController: ChooseGroupsTVCDelegate {
                 sheep.groupMemberships.remove(at: indexPath)
             }
         }
+        if let indexPath = sheep.groupMemberships.index(of: deletedGroup){
+            sheep.groupMemberships.remove(at: indexPath)
+        }
         modelC?.document?.sheepList?.groups = newGroups
         updateModel()
+        
         tableView.reloadData()
     }
 }

@@ -19,6 +19,7 @@ class SheepDocument: UIDocument {
             sheep._ramID = sheep.ram?.sheepID
             sheep._motherID = sheep.mother?.sheepID
             sheep._lambIDs = sheep.lambs.map{$0.sheepID!}
+            sheep._groupMemberships = sheep.groupMemberships.map{$0.title}
         })
         sheepList?.workingSet.forEach({(key,sheep) in
             self.sheepList?._workingSet.insert(sheep.sheepID!)
@@ -52,6 +53,9 @@ class SheepDocument: UIDocument {
                     sheep.mother = self.sheepList?.sheeps[_motherID]
                 }
                 sheep.lambs = sheep._lambIDs.flatMap({(self.sheepList?.sheeps[$0])})
+                sheep.groupMemberships = sheep._groupMemberships.flatMap({ title in
+                    return self.sheepList?.groups.first(where: {$0.title == title})
+                    })
                 
             })
             self.sheepList?.workingSet = [:]

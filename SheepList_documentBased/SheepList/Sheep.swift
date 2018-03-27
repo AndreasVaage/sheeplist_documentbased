@@ -16,7 +16,8 @@ class Sheep: Equatable, Codable{
         case birthday
         case notes
         case assumedNumberOfLambs
-        case groupMemberships
+        //case groupMemberships
+        case _groupMemberships
         case female
         case weightings
         //case lambs
@@ -40,7 +41,7 @@ class Sheep: Equatable, Codable{
     weak var father: Sheep? = nil
     weak var ram: Sheep? = nil
     var assumedNumberOfLambs = 0
-    var groupMemberships: [Group]
+    var groupMemberships = [Group]()
     var female = true
     var weightings = [Weigthing(weight: 40.5)]
     
@@ -54,6 +55,7 @@ class Sheep: Equatable, Codable{
     var _ramID: String?
     var _motherID: String?
     var _lambIDs = [String]()
+    var _groupMemberships = [String]()
     
     
     init(sheepID: String?) {

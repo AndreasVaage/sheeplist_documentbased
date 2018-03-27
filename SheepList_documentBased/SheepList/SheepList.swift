@@ -40,7 +40,7 @@ class SheepList: Codable{
     }
 }
 
-struct Group: Codable, Equatable {
+class Group: Codable, Equatable {
     static func ==(lhs: Group, rhs: Group) -> Bool {
         return lhs.title == rhs.title && lhs._color == rhs._color
     }
@@ -54,7 +54,7 @@ struct Group: Codable, Equatable {
         self._color = color.toHexString()
     }
     
-    mutating func increasePopularity() {
+    func increasePopularity() {
         popularity += 1
     }
 }
