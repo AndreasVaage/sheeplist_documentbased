@@ -19,6 +19,14 @@ class WorkingSetController: SheepTableVC {
         let sheep = displayedSheeps[index]
         modelC.document?.sheepList?.workingSet.removeValue(forKey: sheep.sheepID!)
         sheeps = modelC.document?.sheepList?.workingSet ?? [:]
+        if shouldMatchSheepsAndLambs{
+            missingLambs = [:]
+            missingSheeps = [:]
+            findMissingSheeps()
+            sheeps.merge(missingSheeps) { (sheep, _) -> Sheep in
+                return sheep
+            }
+        }
         recalculateDisplayedData()
         modelC.dataChanged()
     }
@@ -74,6 +82,12 @@ class WorkingSetController: SheepTableVC {
         for sheep in sheeps.values{
             if sheep.isLamb(), let mother = sheep.mother, !sheeps.values.contains(mother){
                 missingSheeps[mother.sheepID!] = mother
+                // Check for missing siblings
+                for lamb in mother.lambs {
+                    if lamb != sheep, !sheeps.values.contains(lamb){
+                        missingLambs[lamb.sheepID!] = lamb
+                    }
+                }
             }else{
                 for lamb in sheep.lambs{
                     if !sheeps.values.contains(lamb){
@@ -97,6 +111,7 @@ class WorkingSetController: SheepTableVC {
         sheeps.merge(missingSheeps) { (sheep, _) -> Sheep in
             return sheep
         }
+        customSortText = "Missing"
         customSortCriterium = {(lhs:Sheep,rhs:Sheep)-> Bool in
             if self.missingSheeps.keys.contains(lhs.sheepID!){ return true }
             if self.missingSheeps.keys.contains(rhs.sheepID!){ return false}
@@ -113,6 +128,7 @@ class WorkingSetController: SheepTableVC {
         shouldDisplayLambsInsideSheepCell = false
         shouldMatchSheepsAndLambs = false
         setLabelEdgeColor = nil
+        customSortText = nil
         missingLambs = [:]
         missingSheeps = [:]
         sheeps = modelC.document?.sheepList?.workingSet ?? [:]
@@ -145,6 +161,14 @@ class WorkingSetController: SheepTableVC {
     
     @IBAction func unwindToWorkingSet(segue: UIStoryboardSegue) {
         sheeps = modelC.workingSet
+        if shouldMatchSheepsAndLambs{
+            missingLambs = [:]
+            missingSheeps = [:]
+            findMissingSheeps()
+            sheeps.merge(missingSheeps) { (sheep, _) -> Sheep in
+                return sheep
+            }
+        }
         guard segue.identifier == "UnwindToWorkingSet" else { return }
         if let _ = tableView.indexPathForSelectedRow {
             //tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.automatic )

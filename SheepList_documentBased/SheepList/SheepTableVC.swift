@@ -29,6 +29,7 @@ class SheepTableVC: UITableViewController {
     var setLabelEdgeColor: ((Sheep) -> UIColor?)?
     var setLabelBackGroundColor: ((Sheep) -> UIColor?)?
     var customSortCriterium: ((Sheep,Sheep) -> Bool)?
+    var customSortText: String?
     let searchController = UISearchController(searchResultsController: nil)
     var displayedSheeps = [Sheep]()
     
@@ -105,6 +106,15 @@ class SheepTableVC: UITableViewController {
             title: "Cancel",
             style: .cancel
         ))
+        if let title = customSortText {
+            chooseSortCrtiterium.addAction(UIAlertAction(
+                title: title,
+                style: .default,
+                handler: {action in
+                    self.sortedBy = .custom
+                    self.reloadData()
+            }))
+        }
         present(chooseSortCrtiterium, animated: true)
     }
     

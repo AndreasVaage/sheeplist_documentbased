@@ -11,6 +11,7 @@ import UIKit
 class AddSheepsToWorkingSetTVC: SheepTableVC {
     var modelC: ModelController!
     
+    
     override func viewDidLoad() {
         sheeps = modelC.sheeps
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class AddSheepsToWorkingSetTVC: SheepTableVC {
         let sheep = displayedSheeps[indexPath.row]
         modelC.document?.sheepList?.workingSet[sheep.sheepID!] = sheep
         modelC.dataChanged()
+        
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
