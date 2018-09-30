@@ -21,6 +21,7 @@ class SheepDocument: UIDocument {
             sheep._lambIDs = sheep.lambs.map{$0.sheepID!}
             sheep._groupMemberships = sheep.groupMemberships.map{$0.title}
         })
+        self.sheepList?._workingSet = []
         sheepList?.workingSet.forEach({(key,sheep) in
             self.sheepList?._workingSet.insert(sheep.sheepID!)
         })

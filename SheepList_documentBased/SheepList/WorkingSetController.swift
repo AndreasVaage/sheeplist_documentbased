@@ -18,6 +18,9 @@ class WorkingSetController: SheepTableVC {
     override func deleteSheep(at index: Int){
         let sheep = displayedSheeps[index]
         modelC.document?.sheepList?.workingSet.removeValue(forKey: sheep.sheepID!)
+        for lamb in sheep.lambs {
+            modelC.document?.sheepList?.workingSet.removeValue(forKey: lamb.sheepID!)
+        }
         sheeps = modelC.document?.sheepList?.workingSet ?? [:]
         if shouldMatchSheepsAndLambs{
             missingLambs = [:]
@@ -71,6 +74,18 @@ class WorkingSetController: SheepTableVC {
         }else{
             chooseAction.addAction(matchSheepAndLambsAction)
         }
+        let deleteWorkingSetAction = UIAlertAction(
+            title: "Clear Working set",
+            style: .destructive,
+            handler: { action in
+                self.sheeps = [:]
+                self.modelC.document?.sheepList?.workingSet = [:]
+                self.missingLambs = [:]
+                self.missingSheeps = [:]
+                self.reloadData()
+        })
+        chooseAction.addAction(deleteWorkingSetAction)
+        
         chooseAction.addAction(UIAlertAction(
             title: "Cancel",
             style: .cancel
